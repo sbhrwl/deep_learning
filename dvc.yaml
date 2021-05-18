@@ -1,0 +1,10 @@
+stages:
+  train_and_evaluate_perceptron_model:
+    cmd: python src/train_and_evaluate_perceptron_model.py
+    deps:
+      - src/perceptron_model.py
+      - src/train_and_evaluate_perceptron_model.py
+  artificial_neural_network_mnist:
+    cmd: python src/artificial_neural_network_mnist.py
+    deps:
+      - src/artificial_neural_network_mnist.py
