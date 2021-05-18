@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-# import joblib
+import joblib
 
 from perceptron_model import Perceptron
 
@@ -27,5 +27,5 @@ if __name__ == "__main__":
     model.fit(X, y)
     # model.predict(X)
 
-    # filename = 'AND_model.model'
-    # joblib.dump(model, filename)
+    filename = 'perceptron-model/AND_model.model'
+    joblib.dump(model, filename)
