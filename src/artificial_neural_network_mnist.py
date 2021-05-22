@@ -76,14 +76,19 @@ if __name__ == "__main__":
     EPOCHS = 10
     VALIDATION_SET = (X_valid, y_valid)
 
+    # Callbacks
     log_dir = get_log_path()
     tb_cb = tf.keras.callbacks.TensorBoard(log_dir=log_dir)
+    early_stopping_cb = tf.keras.callbacks.EarlyStopping(patience=5, restore_best_weights=True)
+    CKPT_path = "mnist-model\model_ckpt.h5"
+    check_pointing_cb = tf.keras.callbacks.ModelCheckpoint(CKPT_path)
+
     history = model_clf.fit(X_train,
                             y_train,
                             epochs=EPOCHS,
                             validation_data=VALIDATION_SET,
                             batch_size=32,
-                            callbacks=[tb_cb])
+                            callbacks=[tb_cb, early_stopping_cb, check_pointing_cb])
 
     UNIQUE_PATH = model_clf.save(save_model_path())
     # loaded_model = tf.keras.models.load_model("<MODEL_NAME_WITH_LOCATION>")
