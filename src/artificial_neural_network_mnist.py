@@ -49,7 +49,7 @@ if __name__ == "__main__":
 
     plt.imshow(X_train[0], cmap="binary")
     plt.axis('off')
-    plt.show()
+    # plt.show()
 
     plt.figure(figsize=(15, 15))
     sns.heatmap(X_train[0], annot=True, cmap="binary")
@@ -81,7 +81,7 @@ if __name__ == "__main__":
     tb_cb = tf.keras.callbacks.TensorBoard(log_dir=log_dir)
     early_stopping_cb = tf.keras.callbacks.EarlyStopping(patience=5, restore_best_weights=True)
     CKPT_path = "mnist-model\model_ckpt.h5"
-    check_pointing_cb = tf.keras.callbacks.ModelCheckpoint(CKPT_path)
+    check_pointing_cb = tf.keras.callbacks.ModelCheckpoint(CKPT_path, save_best_only=True)
 
     history = model_clf.fit(X_train,
                             y_train,
@@ -99,3 +99,12 @@ if __name__ == "__main__":
     # %load_ext tensorboard
     # %tensorboard --logdir logs
 
+    # load model from CKPT
+    # ckpt_model = tf.keras.models.load_model(CKPT_path)
+    #
+    # history = ckpt_model.fit(X_train,
+    #                          y_train,
+    #                          epochs=EPOCHS,
+    #                          validation_data=VALIDATION_SET,
+    #                          batch_size=32,
+    #                          callbacks=[tb_cb, early_stopping_cb, check_pointing_cb])
