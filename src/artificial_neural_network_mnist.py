@@ -8,10 +8,28 @@ import time
 import os
 
 
-def saveModel_path(model_dir="mnist-model"):
+def layer_details(model):
+    hidden_layer1 = model.layers[1]
+    print("hidden_layer1.name", hidden_layer1.name)
+    print(model.get_layer(hidden_layer1.name) is hidden_layer1)
+    type(hidden_layer1.get_weights())
+    hidden_layer1.get_weights()
+    weights, biases = hidden_layer1.get_weights()
+    print("shape of weights \n", weights.shape, "\n")
+    print("shape of biases \n", biases.shape)
+
+
+def get_log_path(log_dir="logs"):
+    fileName = time.strftime("log_%Y_%m_%d_%H_%M_%S")
+    log_path = os.path.join(log_dir, fileName)
+    print(f"saving logs at: {log_path}")
+    return log_path
+
+
+def save_model_path(model_dir="mnist-model"):
     os.makedirs(model_dir, exist_ok=True)
-    fileName = time.strftime("Model_%Y_%m_%d_%H_%M_%S_.h5")
-    model_path = os.path.join(model_dir, fileName)
+    file_name_h5 = time.strftime("Model_%Y_%m_%d_%H_%M_%S_.h5")
+    model_path = os.path.join(model_dir, file_name_h5)
     print(f"your model will be saved at the following location\n{model_path}")
     return model_path
 
@@ -58,7 +76,21 @@ if __name__ == "__main__":
     EPOCHS = 10
     VALIDATION_SET = (X_valid, y_valid)
 
-    history = model_clf.fit(X_train, y_train, epochs=EPOCHS,
-                            validation_data=VALIDATION_SET)
+    log_dir = get_log_path()
+    tb_cb = tf.keras.callbacks.TensorBoard(log_dir=log_dir)
+    history = model_clf.fit(X_train,
+                            y_train,
+                            epochs=EPOCHS,
+                            validation_data=VALIDATION_SET,
+                            batch_size=32,
+                            callbacks=[tb_cb])
 
-    UNIQUE_PATH = model_clf.save(saveModel_path())
+    UNIQUE_PATH = model_clf.save(save_model_path())
+    # loaded_model = tf.keras.models.load_model("<MODEL_NAME_WITH_LOCATION>")
+    # Integrate MlFlow
+    # https://drive.google.com/drive/u/3/folders/1HI4YeqqIXS4SxDr32YVqvhdFIQFkzk12
+
+    # Jupyter NB
+    # %load_ext tensorboard
+    # %tensorboard --logdir logs
+
