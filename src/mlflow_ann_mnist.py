@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import mlflow
 
 import time
 import os
@@ -12,30 +13,11 @@ sys.path.append('./src/get_parameters')
 from get_parameters import get_parameters
 
 
-def layer_details(model):
-    hidden_layer1 = model.layers[1]
-    print("hidden_layer1.name", hidden_layer1.name)
-    print(model.get_layer(hidden_layer1.name) is hidden_layer1)
-    type(hidden_layer1.get_weights())
-    hidden_layer1.get_weights()
-    weights, biases = hidden_layer1.get_weights()
-    print("shape of weights \n", weights.shape, "\n")
-    print("shape of biases \n", biases.shape)
-
-
 def get_log_path(log_directory):
     file_name = time.strftime("log_%Y_%m_%d_%H_%M_%S")
     log_path = os.path.join(log_directory, file_name)
     print(f"saving logs at: {log_path}")
     return log_path
-
-
-def save_model_path(model_dir):
-    os.makedirs(model_dir, exist_ok=True)
-    file_name_h5 = time.strftime("Model_%Y_%m_%d_%H_%M_%S_.h5")
-    model_path = os.path.join(model_dir, file_name_h5)
-    print(f"your model will be saved at the following location\n{model_path}")
-    return model_path
 
 
 if __name__ == "__main__":
@@ -77,41 +59,50 @@ if __name__ == "__main__":
                       metrics=METRICS)
 
     EPOCHS = 10
+    BATCH = 55
     VALIDATION_SET = (X_valid, y_valid)
 
     config = get_parameters()
     ann_mnist_config = config["ann_mnist_config"]
     tensorboard_logs = ann_mnist_config["tensorboard_logs"]
-    artifacts_dir = ann_mnist_config["artifacts_dir"]
 
     # Callbacks
     log_dir = get_log_path(tensorboard_logs)
     tb_cb = tf.keras.callbacks.TensorBoard(log_dir=log_dir)
     early_stopping_cb = tf.keras.callbacks.EarlyStopping(patience=5, restore_best_weights=True)
-
     CKPT_path = ann_mnist_config["checkpoint_path"]
     check_pointing_cb = tf.keras.callbacks.ModelCheckpoint(CKPT_path, save_best_only=True)
 
-    history = model_clf.fit(X_train,
-                            y_train,
-                            epochs=EPOCHS,
-                            validation_data=VALIDATION_SET,
-                            batch_size=32,
-                            callbacks=[tb_cb, early_stopping_cb, check_pointing_cb])
+    config = get_parameters()
+    mlflow_config = config["mlflow_config"]
+    remote_server_uri = mlflow_config["remote_server_uri"]
+    mlflow.set_tracking_uri(remote_server_uri)
+    mlflow.set_experiment(mlflow_config["experiment_name"])
 
-    UNIQUE_PATH = model_clf.save(save_model_path(artifacts_dir))
-    # loaded_model = tf.keras.models.load_model("<MODEL_NAME_WITH_LOCATION>")
+    with mlflow.start_run(run_name=mlflow_config["run_name"]) as mlops_run:
+        history = model_clf.fit(X_train,
+                                y_train,
+                                epochs=EPOCHS,
+                                validation_data=VALIDATION_SET,
+                                batch_size=BATCH,
+                                callbacks=[tb_cb, early_stopping_cb, check_pointing_cb])
 
-    # Jupyter NB
-    # %load_ext tensorboard
-    # %tensorboard --logdir logs
+        (loss, accuracy, val_loss, val_accuracy) = history.history
 
-    # load model from CKPT
-    # ckpt_model = tf.keras.models.load_model(CKPT_path)
-    #
-    # history = ckpt_model.fit(X_train,
-    #                          y_train,
-    #                          epochs=EPOCHS,
-    #                          validation_data=VALIDATION_SET,
-    #                          batch_size=32,
-    #                          callbacks=[tb_cb, early_stopping_cb, check_pointing_cb])
+        mlflow.log_param("epochs", EPOCHS)
+        mlflow.log_param("batch_size", BATCH)
+
+        # mlflow.log_metric("loss", loss)
+        # mlflow.log_metric("accuracy", accuracy)
+        # mlflow.log_metric("val_loss", val_loss)
+        # mlflow.log_metric("val_accuracy", val_accuracy)
+
+        # tracking_url_type_store = urlparse(mlflow.get_artifact_uri()).scheme
+        #
+        # if tracking_url_type_store != "file":
+        #     mlflow.sklearn.log_model(
+        #         model_clf,
+        #         "model",
+        #         registered_model_name=mlflow_config["registered_model_name"])
+        # else:
+        #     mlflow.sklearn.load_model(model_clf, "model")

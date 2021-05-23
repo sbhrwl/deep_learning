@@ -8,3 +8,7 @@ stages:
     cmd: python src/artificial_neural_network_mnist.py
     deps:
       - src/artificial_neural_network_mnist.py
+  mlflow_ann_mnist:
+    cmd: python src/mlflow_ann_mnist.py
+    deps:
+      - src/mlflow_ann_mnist.py

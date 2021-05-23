@@ -3,6 +3,10 @@ import pandas as pd
 import joblib
 
 from perceptron_model import Perceptron
+import sys
+# sys.path.insert(1, './src/get_parameters')
+sys.path.append('./src/get_parameters')
+from get_parameters import get_parameters
 
 
 def predict(self, X):
@@ -27,5 +31,7 @@ if __name__ == "__main__":
     model.fit(X, y)
     # model.predict(X)
 
-    filename = 'perceptron-model/AND_model.model'
+    config = get_parameters()
+    perceptron_config = config["perceptron_config"]
+    filename = perceptron_config["artifacts_dir"]
     joblib.dump(model, filename)

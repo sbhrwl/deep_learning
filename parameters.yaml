@@ -1,3 +1,19 @@
 base:
   project_name: MNIST Digit Analysis
   dataset_name: mnist datset
+
+perceptron_config:
+  artifacts_dir: artifacts/perceptron-model/AND_model.model
+
+ann_mnist_config:
+  artifacts_dir: artifacts\ann-mnist-model
+  checkpoint_path: artifacts\ann-mnist-model\model_ckpt.h5
+  tensorboard_logs: artifacts\tensorboard_logs
+
+mlflow_config:
+  artifacts_dir: artifacts/mlflow-artifacts
+  experiment_name: Ann MNIST model
+  run_name: mlops
+  registered_model_name: Ann MNISTmodel
+  remote_server_uri: http://localhost:1234
+  webapp_model_dir: artifacts/mlflow-artifacts/production-model/production_model.joblib
