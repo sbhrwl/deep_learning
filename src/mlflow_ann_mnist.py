@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import mlflow
+from urllib.parse import urlparse
 
 import time
 import os
@@ -76,6 +77,7 @@ if __name__ == "__main__":
     config = get_parameters()
     mlflow_config = config["mlflow_config"]
     remote_server_uri = mlflow_config["remote_server_uri"]
+    registered_mlflow_model = mlflow_config["registered_model_name"]
     mlflow.set_tracking_uri(remote_server_uri)
     mlflow.set_experiment(mlflow_config["experiment_name"])
 
@@ -97,12 +99,12 @@ if __name__ == "__main__":
         # mlflow.log_metric("val_loss", val_loss)
         # mlflow.log_metric("val_accuracy", val_accuracy)
 
-        # tracking_url_type_store = urlparse(mlflow.get_artifact_uri()).scheme
-        #
+        tracking_url_type_store = urlparse(mlflow.get_artifact_uri()).scheme
+
         # if tracking_url_type_store != "file":
         #     mlflow.sklearn.log_model(
         #         model_clf,
         #         "model",
-        #         registered_model_name=mlflow_config["registered_model_name"])
+        #         registered_model_name=registered_mlflow_model)
         # else:
         #     mlflow.sklearn.load_model(model_clf, "model")

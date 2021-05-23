@@ -19,5 +19,5 @@ stages:
     cmd: python src/mlflow_ann_mnist.py
     deps:
     - path: src/mlflow_ann_mnist.py
-      md5: 7c767476627ab088ef784ee4ff5b1c7a
-      size: 4144
+      md5: a6366c68d274fbb3b85988efeb5f9a21
+      size: 4223
