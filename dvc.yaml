@@ -1,14 +1,16 @@
 stages:
   train_and_evaluate_perceptron_model:
-    cmd: python src/train_and_evaluate_perceptron_model.py
+    cmd: python src/perceptron/train_and_evaluate_perceptron_model.py
     deps:
-      - src/perceptron_model.py
-      - src/train_and_evaluate_perceptron_model.py
+      - src/perceptron/perceptron_model.py
+      - src/perceptron/train_and_evaluate_perceptron_model.py
   artificial_neural_network_mnist:
-    cmd: python src/artificial_neural_network_mnist.py
+    cmd: python src/ann_mnist_basic_model/artificial_neural_network_mnist.py
     deps:
-      - src/artificial_neural_network_mnist.py
+      - src/ann_mnist_basic_model/artificial_neural_network_mnist.py
   mlflow_ann_mnist:
     cmd: python src/mlflow_ann_mnist.py
     deps:
       - src/mlflow_ann_mnist.py
+# mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./artifacts/mlflow-artifacts --host 0.0.0.0 -p 1234
+

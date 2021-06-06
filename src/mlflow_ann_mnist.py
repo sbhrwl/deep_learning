@@ -1,17 +1,15 @@
 import tensorflow as tf
-import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-import mlflow
-from urllib.parse import urlparse
+import mlflow.tensorflow
 
 import time
 import os
 import sys
+
 # sys.path.insert(1, './src/get_parameters')
 sys.path.append('./src/get_parameters')
-from get_parameters import get_parameters
+from src.core.get_parameters import get_parameters
 
 
 def get_log_path(log_directory):
@@ -21,90 +19,111 @@ def get_log_path(log_directory):
     return log_path
 
 
-if __name__ == "__main__":
-    print(f"Tensorflow Version: {tf.__version__}")
-    print(f"Keras Version: {tf.keras.__version__}")
+def get_data():
     mnist = tf.keras.datasets.mnist
-    (X_train_full, y_train_full), (X_test, y_test) = mnist.load_data()
-    print(f"data type of X_train_full: {X_train_full.dtype},\nshape of X_train_full: {X_train_full.shape}")
+    (features_train, target_train), (features_test, target_test) = mnist.load_data()
+    print(f"data type of features_train: {features_train.dtype},\nshape of features_train: {features_train.shape}")
+    return (features_train, target_train), (features_test, target_test)
 
-    # scale the train, validation and test set
-    X_valid, X_train = X_train_full[:5000] / 255., X_train_full[5000:] / 255.
-    y_valid, y_train = y_train_full[:5000], y_train_full[5000:]
-    X_test = X_test / 255.
 
-    plt.imshow(X_train[0], cmap="binary")
+def get_scaled_train_validation_test_sets(features_train, target_train, features_test):
+    features_validation = features_train[:5000] / 255.
+    features_train = features_train[5000:] / 255.
+    target_validation = target_train[:5000]
+    target_train = target_train[5000:]
+    features_test = features_test / 255.
+    return features_train, target_train, features_validation, target_validation, features_test
+
+
+def basic_analysis(features_train, target_train):
+    plt.imshow(features_train[0], cmap="binary")
     plt.axis('off')
     # plt.show()
 
     plt.figure(figsize=(15, 15))
-    sns.heatmap(X_train[0], annot=True, cmap="binary")
-    # actual value of y_train
-    y_train[0]
+    sns.heatmap(features_train[0], annot=True, cmap="binary")
+    # actual value of target_train
+    # print(target_train[0])
 
-    LAYERS = [tf.keras.layers.Flatten(input_shape=[28, 28], name="inputLayer"),
-              tf.keras.layers.Dense(300, activation="relu", name="hiddenLayer1"),
-              tf.keras.layers.Dense(100, activation="relu", name="hiddenLayer2"),
-              tf.keras.layers.Dense(10, activation="softmax", name="outputLayer")]
 
-    model_clf = tf.keras.models.Sequential(LAYERS)
-    print(model_clf.layers)
-    print(model_clf.summary())
+def get_model():
+    LAYERS = [tf.keras.layers.Flatten(input_shape=[28, 28], name="InputLayer"),
+              tf.keras.layers.Dense(300, activation="relu", name="HiddenLayer1"),
+              tf.keras.layers.Dense(100, activation="relu", name="HiddenLayer2"),
+              tf.keras.layers.Dense(10, activation="softmax", name="OutputLayer")]
 
+    tf_model = tf.keras.models.Sequential(LAYERS)
+    print(tf_model.layers)
+    print(tf_model.summary())
+
+    # Set Metrics for the model
     LOSS_FUNCTION = "sparse_categorical_crossentropy"  # use => tf.losses.sparse_categorical_crossentropy
     OPTIMIZER = "SGD"  # or use with custom learning rate=> tf.keras.optimizers.SGD(0.02)
     METRICS = ["accuracy"]
 
-    model_clf.compile(loss=LOSS_FUNCTION,
-                      optimizer=OPTIMIZER,
-                      metrics=METRICS)
+    tf_model.compile(loss=LOSS_FUNCTION,
+                     optimizer=OPTIMIZER,
+                     metrics=METRICS)
+    return tf_model
 
-    EPOCHS = 10
-    BATCH = 55
-    VALIDATION_SET = (X_valid, y_valid)
 
+def setup_callbacks_for_model_training(model_tensorboard_logs, model_CKPT_path):
+    log_dir = get_log_path(model_tensorboard_logs)
+    tb_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir)
+    early_stopping_callback = tf.keras.callbacks.EarlyStopping(patience=5, restore_best_weights=True)
+    check_pointing_callback = tf.keras.callbacks.ModelCheckpoint(model_CKPT_path, save_best_only=True)
+    return tb_callback, early_stopping_callback, check_pointing_callback
+
+
+if __name__ == "__main__":
+    print(f"Tensorflow Version: {tf.__version__}")
+    print(f"Keras Version: {tf.keras.__version__}")
     config = get_parameters()
+
     ann_mnist_config = config["ann_mnist_config"]
     tensorboard_logs = ann_mnist_config["tensorboard_logs"]
-
-    # Callbacks
-    log_dir = get_log_path(tensorboard_logs)
-    tb_cb = tf.keras.callbacks.TensorBoard(log_dir=log_dir)
-    early_stopping_cb = tf.keras.callbacks.EarlyStopping(patience=5, restore_best_weights=True)
     CKPT_path = ann_mnist_config["checkpoint_path"]
-    check_pointing_cb = tf.keras.callbacks.ModelCheckpoint(CKPT_path, save_best_only=True)
 
-    config = get_parameters()
     mlflow_config = config["mlflow_config"]
     remote_server_uri = mlflow_config["remote_server_uri"]
-    registered_mlflow_model = mlflow_config["registered_model_name"]
+
+    # Step 1: Load data
+    (X_train, y_train), (X_test, y_test) = get_data()
+
+    # Step 2: Scale the train, validation and test set
+    X_train, y_train, X_validation, y_validation, X_test = get_scaled_train_validation_test_sets(X_train,
+                                                                                                 y_train,
+                                                                                                 X_test)
+
+    # Step 3: Analyse train data
+    basic_analysis(X_train, y_train)
+
+    # Step 4: Create Model
+    model = get_model()
+
+    # Step 5: Set Hyper parameters
+    EPOCHS = 10
+    BATCH = 55
+    VALIDATION_SET = (X_validation, y_validation)
+
+    # Step 6: Setup Callbacks
+    tb_cb, early_stopping_cb, check_pointing_cb = setup_callbacks_for_model_training(tensorboard_logs, CKPT_path)
+
+    # Step 7: Setup MLFLOW
     mlflow.set_tracking_uri(remote_server_uri)
     mlflow.set_experiment(mlflow_config["experiment_name"])
+    # if the value passed is 2,
+    # mlflow will log the training metrics (loss, accuracy, and validation loss etc.) every 2 epochs.
+    mlflow.tensorflow.autolog(every_n_iter=2)
 
-    with mlflow.start_run(run_name=mlflow_config["run_name"]) as mlops_run:
-        history = model_clf.fit(X_train,
-                                y_train,
-                                epochs=EPOCHS,
-                                validation_data=VALIDATION_SET,
-                                batch_size=BATCH,
-                                callbacks=[tb_cb, early_stopping_cb, check_pointing_cb])
+    # Step 8: Train
+    history = model.fit(X_train,
+                        y_train,
+                        epochs=EPOCHS,
+                        validation_data=VALIDATION_SET,
+                        batch_size=BATCH,
+                        callbacks=[tb_cb, early_stopping_cb, check_pointing_cb])
 
-        (loss, accuracy, val_loss, val_accuracy) = history.history
+    (loss, accuracy, val_loss, val_accuracy) = history.history
 
-        mlflow.log_param("epochs", EPOCHS)
-        mlflow.log_param("batch_size", BATCH)
-
-        # mlflow.log_metric("loss", loss)
-        # mlflow.log_metric("accuracy", accuracy)
-        # mlflow.log_metric("val_loss", val_loss)
-        # mlflow.log_metric("val_accuracy", val_accuracy)
-
-        tracking_url_type_store = urlparse(mlflow.get_artifact_uri()).scheme
-
-        # if tracking_url_type_store != "file":
-        #     mlflow.sklearn.log_model(
-        #         model_clf,
-        #         "model",
-        #         registered_model_name=registered_mlflow_model)
-        # else:
-        #     mlflow.sklearn.load_model(model_clf, "model")
+    mlflow.end_run()

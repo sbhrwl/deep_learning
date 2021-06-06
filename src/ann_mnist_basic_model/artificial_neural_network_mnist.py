@@ -1,6 +1,4 @@
 import tensorflow as tf
-import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -8,8 +6,8 @@ import time
 import os
 import sys
 # sys.path.insert(1, './src/get_parameters')
-sys.path.append('./src/get_parameters')
-from get_parameters import get_parameters
+sys.path.append('./src')
+from core.get_parameters import get_parameters
 
 
 def layer_details(model):

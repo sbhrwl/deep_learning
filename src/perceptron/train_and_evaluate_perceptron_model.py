@@ -4,9 +4,9 @@ import joblib
 
 from perceptron_model import Perceptron
 import sys
-# sys.path.insert(1, './src/get_parameters')
-sys.path.append('./src/get_parameters')
-from get_parameters import get_parameters
+
+sys.path.append('./src')
+from core.get_parameters import get_parameters
 
 
 def predict(self, X):

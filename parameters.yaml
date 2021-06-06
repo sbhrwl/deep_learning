@@ -12,8 +12,5 @@ ann_mnist_config:
 
 mlflow_config:
   artifacts_dir: artifacts/mlflow-artifacts
-  experiment_name: Ann MNIST model
-  run_name: mlops
-  registered_model_name: Ann MNISTmodel
   remote_server_uri: http://localhost:1234
-  webapp_model_dir: artifacts/mlflow-artifacts/production-model/production_model.joblib
+  experiment_name: ANN MNIST model
