@@ -14,3 +14,12 @@ mlflow_config:
   artifacts_dir: artifacts/mlflow-artifacts
   remote_server_uri: http://localhost:1234
   experiment_name: ANN MNIST model
+
+model_metrics:
+  loss_function: "sparse_categorical_crossentropy"  # use => tf.losses.sparse_categorical_crossentropy
+  optimizer: "SGD"  # or use with custom learning rate=> tf.keras.optimizers.SGD(0.02)
+  metrics: ["accuracy"]
+
+model_training_parameters:
+  epochs: 10
+  batch: 50

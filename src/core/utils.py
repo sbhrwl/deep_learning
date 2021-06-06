@@ -3,6 +3,10 @@ import os
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import seaborn as sns
+import sys
+
+sys.path.append('./src')
+from core.get_parameters import get_parameters
 
 
 def get_data():
@@ -42,14 +46,16 @@ def get_model():
     print(tf_model.layers)
     print(tf_model.summary())
 
-    # Set Metrics for the model
-    LOSS_FUNCTION = "sparse_categorical_crossentropy"  # use => tf.losses.sparse_categorical_crossentropy
-    OPTIMIZER = "SGD"  # or use with custom learning rate=> tf.keras.optimizers.SGD(0.02)
-    METRICS = ["accuracy"]
+    config = get_parameters()
 
-    tf_model.compile(loss=LOSS_FUNCTION,
-                     optimizer=OPTIMIZER,
-                     metrics=METRICS)
+    model_metrics = config["model_metrics"]
+    loss_function = model_metrics["loss_function"]
+    optimizer = model_metrics["optimizer"]
+    metrics = model_metrics["metrics"]
+
+    tf_model.compile(loss=loss_function,
+                     optimizer=optimizer,
+                     metrics=metrics)
     return tf_model
 
 
