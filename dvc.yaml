@@ -9,8 +9,8 @@ stages:
     deps:
       - src/ann_mnist_basic_model/artificial_neural_network_mnist.py
   mlflow_ann_mnist:
-    cmd: python src/mlflow_ann_mnist.py
+    cmd: python src/mlflow_ann_mnist/mlflow_ann_mnist.py
     deps:
-      - src/mlflow_ann_mnist.py
+      - src/mlflow_ann_mnist/mlflow_ann_mnist.py
 # mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./artifacts/mlflow-artifacts --host 0.0.0.0 -p 1234
 

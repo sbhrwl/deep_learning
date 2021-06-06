@@ -1,20 +1,20 @@
 schema: '2.0'
 stages:
   artificial_neural_network_mnist:
-    cmd: python src/artificial_neural_network_mnist.py
+    cmd: python src/ann_mnist_basic_model/artificial_neural_network_mnist.py
     deps:
-    - path: src/artificial_neural_network_mnist.py
-      md5: 86ff110a5dfd978f372914c09e076e29
-      size: 4419
+    - path: src/ann_mnist_basic_model/artificial_neural_network_mnist.py
+      md5: 7532b0d8719e44dbcab38992ebcbd96a
+      size: 4368
   train_and_evaluate_perceptron_model:
-    cmd: python src/train_and_evaluate_perceptron_model.py
+    cmd: python src/perceptron/train_and_evaluate_perceptron_model.py
     deps:
-    - path: src/perceptron_model.py
+    - path: src/perceptron/perceptron_model.py
       md5: e0083c4cf3eb0776835b8ffc7b594322
       size: 1193
-    - path: src/train_and_evaluate_perceptron_model.py
-      md5: 0c45ea63534491efaa85fe20a2b4c9fd
-      size: 973
+    - path: src/perceptron/train_and_evaluate_perceptron_model.py
+      md5: 79aad8847425c8c96dc428d819fb856e
+      size: 919
   mlflow_ann_mnist:
     cmd: python src/mlflow_ann_mnist.py
     deps:
