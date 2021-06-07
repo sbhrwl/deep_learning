@@ -14,16 +14,6 @@ def update_even_odd_labels(labels):
 
 
 if __name__ == "__main__":
-    config = get_parameters()
-
-    ann_mnist_config = config["ann_mnist_config"]
-    tensorboard_logs = ann_mnist_config["tensorboard_logs"]
-    CKPT_path = ann_mnist_config["checkpoint_path"]
-
-    model_training_parameters = config["model_training_parameters"]
-    epochs_to_train = model_training_parameters["epochs"]
-    batch_size_for_training = model_training_parameters["batch"]
-
     # Step 1: Load data
     (X_train, y_train), (X_test, y_test) = get_data()
 
@@ -40,29 +30,18 @@ if __name__ == "__main__":
     print("New_model Summary")
     print(model.summary())
 
-    # Step 7: Setup Callbacks
-    tb_cb, early_stopping_cb, check_pointing_cb = setup_callbacks_for_model_training(tensorboard_logs, CKPT_path)
-
-    # Step 8: Train
+    # Step 5: Train
     VALIDATION_SET = (X_validation, y_validation_binary)
+    train_model(model, X_train, y_train_binary, VALIDATION_SET)
 
-    history = model.fit(X_train,
-                        y_train_binary,
-                        epochs=epochs_to_train,
-                        validation_data=VALIDATION_SET,
-                        batch_size=batch_size_for_training,
-                        callbacks=[tb_cb, early_stopping_cb, check_pointing_cb])
-
-    (loss, accuracy, val_loss, val_accuracy) = history.history
-
-    # Step 9: Evaluate
+    # Step 6: Evaluate
     model.evaluate(X_test, y_test_binary)
 
-    # 9.1: Evaluation Test
+    # 6.1: Evaluation Test
     X_new = X_test[:3]
     y_test[:3], y_test_binary[:3]
 
-    # 9.2: Verify Predictions
+    # 6.2: Verify Predictions
     predictions = np.argmax(model.predict(X_new), axis=-1)
     # model.predict(X_new)
     print(predictions)

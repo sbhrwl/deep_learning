@@ -14,6 +14,8 @@ mlflow_config:
   artifacts_dir: artifacts/mlflow-artifacts
   remote_server_uri: http://localhost:1234
   experiment_name: ANN MNIST model
+  tensorflow_auto_log_every_n_iter: 2
+  # 2: mlflow will log the training metrics (loss, accuracy, and validation loss etc.) every 2 epochs
 
 model_metrics:
   loss_function: "sparse_categorical_crossentropy"  # use => tf.losses.sparse_categorical_crossentropy
@@ -23,9 +25,16 @@ model_metrics:
 model_training_parameters:
   epochs: 1
   batch: 50
+  configure_layers:
+    hidden_layer_1_name: hidden_layer_1
+    hidden_layer_1_activation: relu
+    hidden_layer_2_name: hidden_layer_2
+    hidden_layer_2_activation: relu
+    output_layer_name: output_layer
+    output_layer_activation: softmax
 
 model_transfer_learning:
-  model_to_load: artifacts/ann-mnist-model/Model_2021_05_23_12_07_13_.h5
+  model_to_load: artifacts/ann-mnist-model/Model_2021_06_07_20_03_44_.h5
   model_metrics:
     loss_function: "sparse_categorical_crossentropy"  # use => tf.losses.sparse_categorical_crossentropy
     optimizer: "SGD"  # or use with custom learning rate=> tf.keras.optimizers.SGD(0.02)

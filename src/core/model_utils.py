@@ -8,10 +8,20 @@ from core.common_utils import get_parameters
 
 
 def get_model():
+    config = get_parameters()
+
+    configure_layers = config["model_training_parameters"]["configure_layers"]
+    hidden_layer_1_name = configure_layers["hidden_layer_1_name"]
+    hidden_layer_1_activation = configure_layers["hidden_layer_1_activation"]
+    hidden_layer_2_name = configure_layers["hidden_layer_2_name"]
+    hidden_layer_2_activation = configure_layers["hidden_layer_2_activation"]
+    output_layer_name = configure_layers["output_layer_name"]
+    output_layer_activation = configure_layers["output_layer_activation"]
+
     LAYERS = [tf.keras.layers.Flatten(input_shape=[28, 28], name="InputLayer"),
-              tf.keras.layers.Dense(300, activation="relu", name="HiddenLayer1"),
-              tf.keras.layers.Dense(100, activation="relu", name="HiddenLayer2"),
-              tf.keras.layers.Dense(10, activation="softmax", name="OutputLayer")]
+              tf.keras.layers.Dense(300, activation=hidden_layer_1_activation, name=hidden_layer_1_name),
+              tf.keras.layers.Dense(100, activation=hidden_layer_2_activation, name=hidden_layer_2_name),
+              tf.keras.layers.Dense(10, activation=output_layer_activation, name=output_layer_name)]
 
     tf_model = tf.keras.models.Sequential(LAYERS)
     print(tf_model.layers)
@@ -55,6 +65,32 @@ def setup_callbacks_for_model_training(model_tensorboard_logs, model_CKPT_path):
     early_stopping_callback = tf.keras.callbacks.EarlyStopping(patience=5, restore_best_weights=True)
     check_pointing_callback = tf.keras.callbacks.ModelCheckpoint(model_CKPT_path, save_best_only=True)
     return tb_callback, early_stopping_callback, check_pointing_callback
+
+
+def train_model(model_to_train, train_features, train_target, validation_data):
+    config = get_parameters()
+
+    ann_mnist_config = config["ann_mnist_config"]
+    tensorboard_logs = ann_mnist_config["tensorboard_logs"]
+    CKPT_path = ann_mnist_config["checkpoint_path"]
+
+    model_training_parameters = config["model_training_parameters"]
+    epochs_to_train = model_training_parameters["epochs"]
+    batch_size_for_training = model_training_parameters["batch"]
+
+    # Step 1: Setup Callbacks
+    tb_cb, early_stopping_cb, check_pointing_cb = setup_callbacks_for_model_training(tensorboard_logs, CKPT_path)
+
+    # Step 2: Train
+    history = model_to_train.fit(train_features,
+                                 train_target,
+                                 epochs=epochs_to_train,
+                                 validation_data=validation_data,
+                                 batch_size=batch_size_for_training,
+                                 callbacks=[tb_cb, early_stopping_cb, check_pointing_cb],
+                                 verbose=2)
+
+    # (loss, accuracy, val_loss, val_accuracy) = history.history
 
 
 def save_model_path(model_dir):
