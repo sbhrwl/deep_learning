@@ -4,8 +4,8 @@ stages:
     cmd: python src/ann_mnist_basic_model/artificial_neural_network_mnist.py
     deps:
     - path: src/ann_mnist_basic_model/artificial_neural_network_mnist.py
-      md5: 7532b0d8719e44dbcab38992ebcbd96a
-      size: 4368
+      md5: 250bbd117f066c5044f3e361e69c7f3b
+      size: 2598
   train_and_evaluate_perceptron_model:
     cmd: python src/perceptron/train_and_evaluate_perceptron_model.py
     deps:
@@ -16,8 +16,8 @@ stages:
       md5: 79aad8847425c8c96dc428d819fb856e
       size: 919
   mlflow_ann_mnist:
-    cmd: python src/mlflow_ann_mnist.py
+    cmd: python src/mlflow_ann_mnist/mlflow_ann_mnist.py
     deps:
-    - path: src/mlflow_ann_mnist.py
-      md5: a6366c68d274fbb3b85988efeb5f9a21
-      size: 4223
+    - path: src/mlflow_ann_mnist/mlflow_ann_mnist.py
+      md5: 74e3c86eb544e1c8e96d05ce89f32fcc
+      size: 2343

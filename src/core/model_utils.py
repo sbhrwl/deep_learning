@@ -1,39 +1,10 @@
 import time
 import os
 import tensorflow as tf
-import matplotlib.pyplot as plt
-import seaborn as sns
 import sys
 
 sys.path.append('./src')
-from core.get_parameters import get_parameters
-
-
-def get_data():
-    mnist = tf.keras.datasets.mnist
-    (features_train, target_train), (features_test, target_test) = mnist.load_data()
-    print(f"data type of features_train: {features_train.dtype},\nshape of features_train: {features_train.shape}")
-    return (features_train, target_train), (features_test, target_test)
-
-
-def get_scaled_train_validation_test_sets(features_train, target_train, features_test):
-    features_validation = features_train[:5000] / 255.
-    features_train = features_train[5000:] / 255.
-    target_validation = target_train[:5000]
-    target_train = target_train[5000:]
-    features_test = features_test / 255.
-    return features_train, target_train, features_validation, target_validation, features_test
-
-
-def basic_analysis(features_train, target_train):
-    plt.imshow(features_train[0], cmap="binary")
-    plt.axis('off')
-    # plt.show()
-
-    plt.figure(figsize=(15, 15))
-    sns.heatmap(features_train[0], annot=True, cmap="binary")
-    # actual value of target_train
-    # print(target_train[0])
+from core.common_utils import get_parameters
 
 
 def get_model():
@@ -60,6 +31,7 @@ def get_model():
 
 
 def get_model_layer_details(model):
+    print(model.summary())
     hidden_layer1 = model.layers[1]
     print("hidden_layer1.name", hidden_layer1.name)
     print(model.get_layer(hidden_layer1.name) is hidden_layer1)

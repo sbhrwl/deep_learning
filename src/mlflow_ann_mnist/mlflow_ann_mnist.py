@@ -3,8 +3,8 @@ import mlflow.tensorflow
 import sys
 
 sys.path.append('./src')
-from core.get_parameters import get_parameters
-from core.utils import *
+from core.common_utils import get_parameters, get_data, get_scaled_train_validation_test_sets, basic_analysis
+from core.model_utils import *
 
 
 if __name__ == "__main__":
@@ -59,3 +59,5 @@ if __name__ == "__main__":
     (loss, accuracy, val_loss, val_accuracy) = history.history
 
     mlflow.end_run()
+
+# mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./artifacts/mlflow-artifacts --host 0.0.0.0 -p 1234

@@ -2,8 +2,8 @@ import tensorflow as tf
 import sys
 # sys.path.insert(1, './src')
 sys.path.append('./src')
-from core.get_parameters import get_parameters
-from core.utils import *
+from core.common_utils import get_parameters, get_data, get_scaled_train_validation_test_sets, basic_analysis
+from core.model_utils import *
 
 
 if __name__ == "__main__":
@@ -15,6 +15,10 @@ if __name__ == "__main__":
     tensorboard_logs = ann_mnist_config["tensorboard_logs"]
     CKPT_path = ann_mnist_config["checkpoint_path"]
     artifacts_dir = ann_mnist_config["artifacts_dir"]
+
+    model_training_parameters = config["model_training_parameters"]
+    epochs_to_train = model_training_parameters["epochs"]
+    batch_size_for_training = model_training_parameters["batch"]
 
     # Step 1: Load data
     (X_train, y_train), (X_test, y_test) = get_data()
@@ -30,20 +34,16 @@ if __name__ == "__main__":
     # Step 4: Create Model
     model = get_model()
 
-    # Step 5: Set Hyper parameters
-    EPOCHS = 10
-    BATCH = 55
-    VALIDATION_SET = (X_validation, y_validation)
-
-    # Step 6: Setup Callbacks
+    # Step 5: Setup Callbacks
     tb_cb, early_stopping_cb, check_pointing_cb = setup_callbacks_for_model_training(tensorboard_logs, CKPT_path)
 
-    # Step 7: Train
+    # Step 6: Train
+    VALIDATION_SET = (X_validation, y_validation)
     history = model.fit(X_train,
                         y_train,
-                        epochs=EPOCHS,
+                        epochs=epochs_to_train,
                         validation_data=VALIDATION_SET,
-                        batch_size=BATCH,
+                        batch_size=batch_size_for_training,
                         callbacks=[tb_cb, early_stopping_cb, check_pointing_cb])
 
     (loss, accuracy, val_loss, val_accuracy) = history.history

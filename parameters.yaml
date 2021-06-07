@@ -21,5 +21,8 @@ model_metrics:
   metrics: ["accuracy"]
 
 model_training_parameters:
-  epochs: 10
+  epochs: 1
   batch: 50
+
+model_transfer_learning:
+  model_to_load: artifacts/ann-mnist-model/Model_2021_06_06_21_26_22_.h5
