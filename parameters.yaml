@@ -25,4 +25,8 @@ model_training_parameters:
   batch: 50
 
 model_transfer_learning:
-  model_to_load: artifacts/ann-mnist-model/Model_2021_06_06_21_26_22_.h5
+  model_to_load: artifacts/ann-mnist-model/Model_2021_05_23_12_07_13_.h5
+  model_metrics:
+    loss_function: "sparse_categorical_crossentropy"  # use => tf.losses.sparse_categorical_crossentropy
+    optimizer: "SGD"  # or use with custom learning rate=> tf.keras.optimizers.SGD(0.02)
+    metrics: [ "accuracy" ]
