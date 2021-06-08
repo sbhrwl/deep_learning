@@ -45,8 +45,8 @@ def get_model_via_transfer_learning():
     optimizer = model_metrics["optimizer"]
     metrics = model_metrics["metrics"]
 
-    new_model.compile(loss=loss_function,
-                      optimizer=optimizer,
+    new_model.compile(loss=tf.losses.sparse_categorical_crossentropy,
+                      optimizer=tf.keras.optimizers.SGD(learning_rate=1e-3),
                       metrics=metrics)
     # print("New_model Summary")
     # print(new_model.summary())

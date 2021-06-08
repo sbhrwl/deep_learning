@@ -1,6 +1,7 @@
 import time
 import os
 import tensorflow as tf
+import matplotlib.pyplot as plt
 import sys
 
 sys.path.append('./src')
@@ -82,6 +83,7 @@ def train_model(model_to_train, train_features, train_target, validation_data):
     ann_mnist_config = config["ann_mnist_config"]
     tensorboard_logs = ann_mnist_config["tensorboard_logs"]
     CKPT_path = ann_mnist_config["checkpoint_path"]
+    learning_curve_plot = ann_mnist_config["learning_curve_plot"]
 
     model_training_parameters = config["model_training_parameters"]
     epochs_to_train = model_training_parameters["epochs"]
@@ -100,6 +102,20 @@ def train_model(model_to_train, train_features, train_target, validation_data):
                                  verbose=2)
 
     # (loss, accuracy, val_loss, val_accuracy) = history.history
+    # If during fit loss values are "nan", then scale the dataset
+    # StandardScaler.fit_transform
+
+    # Step 3: Plot Learning curve
+    plt.scatter(x=history.epoch, y=history.history['loss'], label='Training Error')
+    plt.scatter(x=history.epoch, y=history.history['val_loss'], label='Validation Error')
+    plt.grid(True)
+    plt.xlabel('Iteration')
+    plt.ylabel('Loss')
+    plt.title('Training Vs Validation Error')
+    plt.legend()
+    plt.savefig(learning_curve_plot)
+    # Short cut
+    # pd.DataFrame(history.history).plot()
 
 
 def save_model_path(model_dir):

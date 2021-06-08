@@ -9,6 +9,7 @@ ann_mnist_config:
   artifacts_dir: artifacts\ann-mnist-model
   checkpoint_path: artifacts\ann-mnist-model\model_ckpt.h5
   tensorboard_logs: artifacts\tensorboard_logs
+  learning_curve_plot: artifacts\ann-mnist-model\learning_curve_plot.png
 
 mlflow_config:
   artifacts_dir: artifacts/mlflow-artifacts
@@ -18,9 +19,9 @@ mlflow_config:
   # 2: mlflow will log the training metrics (loss, accuracy, and validation loss etc.) every 2 epochs
 
 model_metrics:
-  loss_function: "sparse_categorical_crossentropy"  # use => tf.losses.sparse_categorical_crossentropy
-  optimizer: "SGD"  # or use with custom learning rate=> tf.keras.optimizers.SGD(0.02)
-  metrics: ["accuracy"]
+    loss_function: "sparse_categorical_crossentropy"  # use => tf.losses.sparse_categorical_crossentropy
+    optimizer: "SGD"  # or use with custom learning rate=> tf.keras.optimizers.SGD(0.02)
+    metrics: [ "accuracy" ]
 
 model_training_parameters:
   epochs: 1
@@ -39,6 +40,12 @@ model_training_parameters:
 model_transfer_learning:
   model_to_load: artifacts/ann-mnist-model/Model_2021_06_07_20_19_03_.h5
   model_metrics:
-    loss_function: "sparse_categorical_crossentropy"  # use => tf.losses.sparse_categorical_crossentropy
-    optimizer: "SGD"  # or use with custom learning rate=> tf.keras.optimizers.SGD(0.02)
-    metrics: [ "accuracy" ]
+    loss_function: tf.losses.sparse_categorical_crossentropy
+    optimizer: tf.keras.optimizers.SGD(learning_rate=1e-3)
+    metrics: [ 'accuracy' ]
+
+hyper_parameter_tuning:
+  number_of_hidden_layers: [20, (40, 20), (45, 30, 15)]
+  activation_functions: ['relu']# ['sigmoid', 'relu']
+  batch_sizes: [50] # [128, 256]
+  number_of_epochs: [2]
