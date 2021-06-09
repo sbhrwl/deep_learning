@@ -124,3 +124,96 @@ def save_model_path(model_dir):
     model_path = os.path.join(model_dir, file_name_h5)
     print(f"your model will be saved at the following location\n{model_path}")
     return model_path
+
+
+def get_bn_model():
+    config = get_parameters()
+
+    configure_layers = config["model_training_parameters"]["configure_layers"]
+    hidden_layer_1_name = configure_layers["hidden_layer_1_name"]
+    hidden_layer_1_activation = configure_layers["hidden_layer_1_activation"]
+    hidden_layer_1_number_of_neurons = configure_layers["hidden_layer_1_number_of_neurons"]
+    hidden_layer_2_name = configure_layers["hidden_layer_2_name"]
+    hidden_layer_2_activation = configure_layers["hidden_layer_2_activation"]
+    hidden_layer_2_number_of_neurons = configure_layers["hidden_layer_2_number_of_neurons"]
+    output_layer_name = configure_layers["output_layer_name"]
+    output_layer_activation = configure_layers["output_layer_activation"]
+    output_layer_number_of_neurons = configure_layers["output_layer_number_of_neurons"]
+
+    LAYERS = [tf.keras.layers.Flatten(input_shape=[28, 28], name="InputLayer"),
+              tf.keras.layers.BatchNormalization(),
+              tf.keras.layers.Dense(hidden_layer_1_number_of_neurons,
+                                    activation=hidden_layer_1_activation,
+                                    name=hidden_layer_1_name),
+              tf.keras.layers.BatchNormalization(),
+              tf.keras.layers.Dense(hidden_layer_2_number_of_neurons,
+                                    activation=hidden_layer_2_activation,
+                                    name=hidden_layer_2_name),
+              tf.keras.layers.BatchNormalization(),
+              tf.keras.layers.Dense(output_layer_number_of_neurons,
+                                    activation=output_layer_activation,
+                                    name=output_layer_name)]
+
+    tf_model = tf.keras.models.Sequential(LAYERS)
+    print(tf_model.layers)
+    print(tf_model.summary())
+
+    config = get_parameters()
+
+    model_metrics = config["model_metrics"]
+    loss_function = model_metrics["loss_function"]
+    optimizer = model_metrics["optimizer"]
+    metrics = model_metrics["metrics"]
+
+    tf_model.compile(loss=loss_function,
+                     optimizer=optimizer,
+                     metrics=metrics)
+    return tf_model
+
+
+def get_bn_before_activation_function_model():
+    config = get_parameters()
+
+    configure_layers = config["model_training_parameters"]["configure_layers"]
+    hidden_layer_1_name = configure_layers["hidden_layer_1_name"]
+    hidden_layer_1_activation = configure_layers["hidden_layer_1_activation"]
+    hidden_layer_1_number_of_neurons = configure_layers["hidden_layer_1_number_of_neurons"]
+    hidden_layer_2_name = configure_layers["hidden_layer_2_name"]
+    hidden_layer_2_activation = configure_layers["hidden_layer_2_activation"]
+    hidden_layer_2_number_of_neurons = configure_layers["hidden_layer_2_number_of_neurons"]
+    output_layer_name = configure_layers["output_layer_name"]
+    output_layer_activation = configure_layers["output_layer_activation"]
+    output_layer_number_of_neurons = configure_layers["output_layer_number_of_neurons"]
+
+    LAYERS_BN_BIAS_FALSE = [
+        tf.keras.layers.Flatten(input_shape=[28, 28], name="InputLayer"),
+        tf.keras.layers.BatchNormalization(),
+        tf.keras.layers.Dense(hidden_layer_1_number_of_neurons,
+                              name=hidden_layer_1_name,
+                              use_bias=False),
+        tf.keras.layers.BatchNormalization(),
+        tf.keras.layers.Activation(hidden_layer_1_activation),
+        tf.keras.layers.Dense(hidden_layer_2_number_of_neurons,
+                              name=hidden_layer_2_name,
+                              use_bias=False),
+        tf.keras.layers.BatchNormalization(),
+        tf.keras.layers.Activation(hidden_layer_2_activation),
+        tf.keras.layers.Dense(output_layer_number_of_neurons,
+                              activation=output_layer_activation,
+                              name=output_layer_name)]
+
+    tf_model = tf.keras.models.Sequential(LAYERS_BN_BIAS_FALSE)
+    print(tf_model.layers)
+    print(tf_model.summary())
+
+    config = get_parameters()
+
+    model_metrics = config["model_metrics"]
+    loss_function = model_metrics["loss_function"]
+    optimizer = model_metrics["optimizer"]
+    metrics = model_metrics["metrics"]
+
+    tf_model.compile(loss=loss_function,
+                     optimizer=optimizer,
+                     metrics=metrics)
+    return tf_model

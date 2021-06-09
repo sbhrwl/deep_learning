@@ -24,7 +24,7 @@ model_metrics:
     metrics: [ "accuracy" ]
 
 model_training_parameters:
-  epochs: 20
+  epochs: 2
   batch: 100
   configure_layers:
     hidden_layer_1_name: hidden_layer_1
