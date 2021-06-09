@@ -8,7 +8,7 @@ sys.path.append('./src')
 from core.common_utils import get_parameters
 
 
-def get_model():
+def get_basic_model():
     config = get_parameters()
 
     configure_layers = config["model_training_parameters"]["configure_layers"]
@@ -217,3 +217,17 @@ def get_bn_before_activation_function_model():
                      optimizer=optimizer,
                      metrics=metrics)
     return tf_model
+
+
+def get_model():
+    config = get_parameters()
+    model_type = config["model_metrics"]["model_type"]
+
+    if model_type == "batch_normalisation":
+        model = get_bn_model()
+    elif model_type == "batch_normalisation_without_bias":
+        model = get_bn_before_activation_function_model()
+    else:
+        model = get_basic_model()
+
+    return model

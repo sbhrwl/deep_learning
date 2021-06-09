@@ -19,9 +19,10 @@ mlflow_config:
   # 2: mlflow will log the training metrics (loss, accuracy, and validation loss etc.) every 2 epochs
 
 model_metrics:
-    loss_function: "sparse_categorical_crossentropy"  # use => tf.losses.sparse_categorical_crossentropy
-    optimizer: "adam"  # or use with custom learning rate=> tf.keras.optimizers.SGD(0.02)
-    metrics: [ "accuracy" ]
+  model_type: "batch_normalisation_without_bias" # basic, batch_normalisation, batch_normalisation_without_bias
+  loss_function: "sparse_categorical_crossentropy"  # use => tf.losses.sparse_categorical_crossentropy
+  optimizer: "adam"  # or use with custom learning rate=> tf.keras.optimizers.SGD(0.02)
+  metrics: [ "accuracy" ]
 
 model_training_parameters:
   epochs: 2
