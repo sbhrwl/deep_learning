@@ -109,3 +109,11 @@ python src/mlflow_ann_mnist/mlflow_ann_mnist.py
 ```
 <img src='https://drive.google.com/uc?id=1RgU7w6c6Mnw9te7vooleeKY4ezUoqAA_'>
 
+Starting from bottom: 
+
+* Run 1: batch_size: 50, epoch 1, Optimizer: SGD - Accuracy: 0.809
+* Run 2: batch_size: 50, epoch 20, Optimizer: SGD - Accuracy: **0.977**
+* Run 3: batch_size: 100, epoch 20, Optimizer: SGD - Accuracy: 0.959
+* Run 4: batch_size: 100, epoch 20, Optimizer: Adam - Accuracy: **0.985**
+* **Run 5: batch_size: 100, epoch 20, Optimizer: Adam: batch normalisation** - Accuracy: **0.994**
+* Run 6: batch_size: 100, epoch 20, Optimizer: Adam: batch normalisation with Bias as false - Accuracy: **0.993**
