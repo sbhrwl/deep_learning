@@ -80,6 +80,8 @@ python src/ann_mnist_basic_model/ann_mnist_basic_model.py
 * By fixing the **distribution of the hidden layer inputs** as the training
 progresses, we expect to improve the training speed. 
 * When values are Normalised, GD converges faster and hence results in faster training
+* Batch Normalisation is useful when we have deep neural networks (CNN)
+* Recommendation: When our network has more than **16** layers use Batch Normalisation
 
 ### ANN Model with Batch normalisation on MNIST dataset
 ```python
@@ -103,7 +105,7 @@ Tuning a particular model can be splitted as below
    * etc..
 
 ## MlFlow
-MlFLow helps by tracking different experiments that we can do with the various training parameters/ model metrics.
+MlFLow helps by tracking different experiments that we can do with the various training parameters and model metrics.
 ```python
 python src/mlflow_ann_mnist/mlflow_ann_mnist.py
 ```
@@ -111,12 +113,22 @@ python src/mlflow_ann_mnist/mlflow_ann_mnist.py
 
 Starting from bottom: 
 
-* Run 1: batch_size: 50, epoch 1, Optimizer: SGD - Accuracy: 0.809
-* Run 2: batch_size: 50, epoch 20, Optimizer: SGD - Accuracy: **0.977**
-* Run 3: batch_size: 100, epoch 20, Optimizer: SGD - Accuracy: 0.959
-* Run 4: batch_size: 100, epoch 20, Optimizer: Adam - Accuracy: **0.985**
-* **Run 5: batch_size: 100, epoch 20, Optimizer: Adam: batch normalisation** - Accuracy: **0.994**
-* Run 6: batch_size: 100, epoch 20, Optimizer: Adam: batch normalisation with Bias as false - Accuracy: **0.993**
+* Run 1: batch_size: 50, epoch 1, Activation function: relu, Optimizer: SGD - Accuracy: 0.809
+* Run 2: batch_size: 50, epoch **20**, Activation function: relu, Optimizer: SGD - Accuracy: **0.977**
+* Run 3: batch_size: **100**, epoch 20, Activation function: relu, Optimizer: SGD - Accuracy: 0.959
+* Run 4: batch_size: 100, epoch 20, Activation function: relu, Optimizer: **Adam** - Accuracy: **0.985**
+* Run 5: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, **batch normalisation** - Accuracy: **0.994**
+* Run 6: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation with **Bias as false** - Accuracy: 0.993
+* Run 7: batch_size: 100, epoch 20, Activation function: **sigmoid**, Optimizer: SGD - Accuracy: 0.922
+* RUn 8: batch_size: 100, epoch 20, Activation function: sigmoid, Optimizer: **Adam** - Accuracy: **0.997**
+* Run 8: Weight initialization: 
+* Run 9: Loss functions: 
+* Run 10: Regularisation techniques 
+  * L1:
+  * L2:
+  * Dropout techniques:
+
+### Observation on Early Stopping and Check-pointing
 
 # Transfer Learning
 * Transfer learning enables us to use the already built robust models
@@ -134,7 +146,8 @@ Starting from bottom:
         # tf.keras.layers.Dense(2, activation="binary")
     )
   ```
-* Train the new Model which now already has weights and we will the it to get weights for new layer(s) added to the model to suit our use case (example: Is the numer Even?)
+* Train the new Model which now already has weights for older layers
+* We will train it to get weights for new layer(s) added to the model to suit our use case (example: Is the numer Even?)
 ```python
 python src/transfer_learning/is_even.py
 ```
