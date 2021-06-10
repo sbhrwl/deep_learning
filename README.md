@@ -134,4 +134,7 @@ Starting from bottom:
         # tf.keras.layers.Dense(2, activation="binary")
     )
   ```
-* Train the new Model which now already has weights and we will the it to get weights for new layer(s) added to the model to suit our use case
+* Train the new Model which now already has weights and we will the it to get weights for new layer(s) added to the model to suit our use case (example: Is the numer Even?)
+```python
+python src/transfer_learning/is_even.py
+```
