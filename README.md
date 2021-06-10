@@ -120,10 +120,11 @@ Starting from bottom:
 * Run 5: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, **batch normalisation** - Accuracy: **0.994**
 * Run 6: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation with **Bias as false** - Accuracy: 0.993
 * Run 7: batch_size: 100, epoch 20, Activation function: **sigmoid**, Optimizer: SGD - Accuracy: 0.922
-* RUn 8: batch_size: 100, epoch 20, Activation function: sigmoid, Optimizer: **Adam** - Accuracy: **0.997**
-* Run 8: Weight initialization: 
-* Run 9: Loss functions: 
-* Run 10: Regularisation techniques 
+* Run 8: batch_size: 100, epoch 20, Activation function: sigmoid, Optimizer: **Adam** - Accuracy: **0.997**
+* Run 9: Weight initialization: Change relu with **he_normal**
+  batch_size: 100, epoch 20, Activation function: relu, Optimizer: **Adam** - Accuracy: **0.998 Best so far**
+* Run 10: Loss functions: ABove observations are with **sparse_categorical_crossentropy**
+* Run 11: Regularisation techniques 
   * L1:
   * L2:
   * Dropout techniques:
