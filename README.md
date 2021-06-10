@@ -109,7 +109,7 @@ MlFLow helps by tracking different experiments that we can do with the various t
 ```python
 python src/mlflow_ann_mnist/mlflow_ann_mnist.py
 ```
-<img src='https://drive.google.com/uc?id=1RgU7w6c6Mnw9te7vooleeKY4ezUoqAA_'>
+<img src='https://drive.google.com/uc?id=1l_0Fxx8jC-MrZsVWFPU7feZH00925BGm'>
 
 Starting from bottom: 
 
@@ -123,7 +123,7 @@ Starting from bottom:
 * Run 8: batch_size: 100, epoch 20, Activation function: sigmoid, Optimizer: **Adam** - Accuracy: **0.997**
 * Run 9: Weight initialization: Change relu with **he_normal**
   batch_size: 100, epoch 20, Activation function: relu, Optimizer: **Adam** - Accuracy: **0.998 Best so far**
-* Run 10: Loss functions: ABove observations are with **sparse_categorical_crossentropy**
+* Run 10: Loss functions: Above observations are with **sparse_categorical_crossentropy**
 * Run 11: Regularisation techniques 
   * L1:
   * L2:
