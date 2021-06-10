@@ -108,3 +108,4 @@ MlFLow helps by tracking different experiments that we can do with the various t
 python src/mlflow_ann_mnist/mlflow_ann_mnist.py
 ```
 <img src='https://drive.google.com/uc?id=1RgU7w6c6Mnw9te7vooleeKY4ezUoqAA_'>
+
