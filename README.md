@@ -117,3 +117,21 @@ Starting from bottom:
 * Run 4: batch_size: 100, epoch 20, Optimizer: Adam - Accuracy: **0.985**
 * **Run 5: batch_size: 100, epoch 20, Optimizer: Adam: batch normalisation** - Accuracy: **0.994**
 * Run 6: batch_size: 100, epoch 20, Optimizer: Adam: batch normalisation with Bias as false - Accuracy: **0.993**
+
+# Transfer Learning
+* Transfer learning enables us to use the already built robust models
+* Steps for Transfer learning
+  * Step 1: Load Previous model
+  * Step 2: Check Model Details (available Trainable layers)
+  * Step 3: Remove Last Layer
+  * Step 4: Create new model
+  ```python
+    lower_pretrained_layers = model.layers[:-1]
+
+    new_model = tf.keras.models.Sequential(lower_pretrained_layers)
+    new_model.add(
+        tf.keras.layers.Dense(2, activation="softmax", name="NewOutputLayer")
+        # tf.keras.layers.Dense(2, activation="binary")
+    )
+  ```
+* Train the new Model which now already has weights and we will the it to get weights for new layer(s) added to the model to suit our use case
