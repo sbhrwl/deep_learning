@@ -130,6 +130,14 @@ Starting from bottom:
   * Dropout techniques:
 
 ### Observation on Early Stopping and Check-pointing
+accuracy      loss             restored_epoch   **stopped_epoch**
+0.9975454807	0.01011859719	          9	               14
+0.9937454462	0.0236865636		         11	               16
+0.9965272546	0.01463884022		        13		              18
+0.9928908944	0.02340739779		         5	               10
+0.9936727285	0.01931540295		         8	               13
+0.9849818349	0.04650410637		         3	                8
+### Once Accuracy/Loss did not improve training stopped before max epoch which was set as **20**
 
 # Transfer Learning
 * Transfer learning enables us to use the already built robust models
