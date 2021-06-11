@@ -2,10 +2,7 @@ import time
 import os
 import tensorflow as tf
 import matplotlib.pyplot as plt
-import sys
-
-sys.path.append('./src')
-from core.common_utils import get_parameters
+from src.core.common_utils import get_parameters
 
 
 def get_basic_model():
