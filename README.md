@@ -2,6 +2,13 @@
 
 * [Perceptron](#perceptron)
 * [Multi Layer Perceptron](#multi-layer-perceptron)
+* [Cost function](#cost-function)
+* [Optimizers](#optimizers)
+* [Problems with ANN](#problems-with-aNN)
+* [Batch Normalisation](#batch-normalisation)
+* [Tuning Model](#tuning-model)
+* [MlFlow](#mlFlow)
+* [Transfer Learning](#transfer-learning)
 
 ## Perceptron
 
@@ -111,7 +118,7 @@ Tuning a particular model can be splitted as below
    * Batch size
    * etc..
 
-## MlFlow
+# MlFlow
 MlFLow helps by tracking different experiments that we can do with the various training parameters and model metrics.
 ```python
 python src/mlflow_ann_mnist/mlflow_ann_mnist.py
@@ -136,7 +143,7 @@ Starting from bottom:
   * L2:
   * Dropout techniques:
 
-### Observation on Early Stopping and Check-pointing
+## Observation on Early Stopping and Check-pointing
 ```python
 accuracy          loss          restored_epoch          stopped_epoch
 0.9975454807	0.01011859719	          9	               14
