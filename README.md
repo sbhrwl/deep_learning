@@ -2,15 +2,17 @@
 
 * [Perceptron](#perceptron)
 * [Multi Layer Perceptron](#multi-layer-perceptron)
+* [Activation functions](#activation-functions)
 * [Cost function](#cost-function)
 * [Optimizers](#optimizers)
+* [Backpropogation with chain rule](#backpropogation-with-chain-rule)
 * [Problems with ANN](#problems-with-aNN)
 * [Batch Normalisation](#batch-normalisation)
 * [Tuning Model](#tuning-model)
 * [MlFlow](#mlFlow)
 * [Transfer Learning](#transfer-learning)
 
-## Perceptron
+# Perceptron
 
 ## A perceptron has 2 calculations to perform
 * Dot product (z) of Features (X) with weights (w) (adding bias)
@@ -21,7 +23,15 @@
 python src/perceptron/perceptron.py
 ```
 
-## There are different choices for Activation functions
+# Multi Layer Perceptron
+* Perceptron is limited to solving basic problem, if we were to build a model that could imitate XOR gate, we need more than one perceptron
+* So, in order to solve real world problems, we need different permutations and combinations of **Perceptron**, which results in MLP.
+* MLP is the building block of complex Artificial Neural Network
+
+<img src="https://i.stack.imgur.com/n2Hde.png" width=40% ali>
+
+# Activation functions
+There are different choices for Activation functions
 * Sigmoid
 * Hyperbolic tangent
 * Relu (Relu and its variants Leaky Relu, Exponential LU, Parametric Relu)
@@ -30,17 +40,10 @@ python src/perceptron/perceptron.py
 * Swish
 * Softplus
 
-### It is the Activation function, more precisely, different parts of activation function that gets activated with the "z" and results in fitting the  model to data
+## It is the Activation function, more precisely, different parts of activation function that gets activated with the "z" and results in fitting the  model to data
 * Boundary line for simple linear problems
 * Curves for non linear problems
 * **Squiggles** for complex non linear problems
-
-## Multi Layer Perceptron
-* Perceptron is limited to solving basic problem, if we were to build a model that could imitate XOR gate, we need more than one perceptron
-* So, in order to solve real world problems, we need different permutations and combinations of **Perceptron**, which results in MLP.
-* MLP is the building block of complex Artificial Neural Network
-
-<img src="https://i.stack.imgur.com/n2Hde.png" width=40% ali>
 
 # Cost function
 
@@ -63,7 +66,9 @@ To minimise loss we perform **Gradient Descent**. The entity that performs gradi
   * AdaGradDelta
   * RMSPROP 
 
-# Question: For ANNs, how do we find the weights and biases so that we get minimum value for Loss/Cost function?
+# Backpropogation with chain rule
+
+## Question: For ANNs, how do we find the weights and biases so that we get minimum value for Loss/Cost function?
 
 ## Solution: Backpropogation with chain rule
 
