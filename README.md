@@ -144,7 +144,7 @@ accuracy          loss          restored_epoch          stopped_epoch
 0.9849818349	0.04650410637	          3	                8
 ```
 
-### Once Accuracy/Loss did not improve training stopped before max epoch which was set as **20**
+### After certain epochs if Accuracy/Loss would not improve, the training will be stopped even before desired number of epochs (2)
 
 # Transfer Learning
 * Transfer learning enables us to use the already built robust models
