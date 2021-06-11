@@ -1,6 +1,9 @@
-# dl_concepts
+# DL concepts
 
-# Perceptron
+* [Perceptron](#perceptron)
+* [Multi Layer Perceptron](#multi-layer-perceptron)
+
+## Perceptron
 
 ## A perceptron has 2 calculations to perform
 * Dot product (z) of Features (X) with weights (w) (adding bias)
@@ -25,7 +28,7 @@ python src/perceptron/perceptron.py
 * Curves for non linear problems
 * **Squiggles** for complex non linear problems
 
-# Multi Layer Perceptron
+## Multi Layer Perceptron
 * Perceptron is limited to solving basic problem, if we were to build a model that could imitate XOR gate, we need more than one perceptron
 * So, in order to solve real world problems, we need different permutations and combinations of **Perceptron**, which results in MLP.
 * MLP is the building block of complex Artificial Neural Network
