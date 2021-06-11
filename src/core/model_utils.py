@@ -15,9 +15,11 @@ def get_basic_model():
     hidden_layer_1_name = configure_layers["hidden_layer_1_name"]
     hidden_layer_1_activation = configure_layers["hidden_layer_1_activation"]
     hidden_layer_1_number_of_neurons = configure_layers["hidden_layer_1_number_of_neurons"]
+    hidden_layer_1_kernel_initializer = configure_layers["hidden_layer_1_kernel_initializer"]
     hidden_layer_2_name = configure_layers["hidden_layer_2_name"]
     hidden_layer_2_activation = configure_layers["hidden_layer_2_activation"]
     hidden_layer_2_number_of_neurons = configure_layers["hidden_layer_2_number_of_neurons"]
+    hidden_layer_2_kernel_initializer = configure_layers["hidden_layer_2_kernel_initializer"]
     output_layer_name = configure_layers["output_layer_name"]
     output_layer_activation = configure_layers["output_layer_activation"]
     output_layer_number_of_neurons = configure_layers["output_layer_number_of_neurons"]
@@ -25,9 +27,11 @@ def get_basic_model():
     LAYERS = [tf.keras.layers.Flatten(input_shape=[28, 28], name="InputLayer"),
               tf.keras.layers.Dense(hidden_layer_1_number_of_neurons,
                                     activation=hidden_layer_1_activation,
+                                    kernel_initializer=hidden_layer_1_kernel_initializer,
                                     name=hidden_layer_1_name),
               tf.keras.layers.Dense(hidden_layer_2_number_of_neurons,
                                     activation=hidden_layer_2_activation,
+                                    kernel_initializer=hidden_layer_2_kernel_initializer,
                                     name=hidden_layer_2_name),
               tf.keras.layers.Dense(output_layer_number_of_neurons,
                                     activation=output_layer_activation,
@@ -133,9 +137,11 @@ def get_bn_model():
     hidden_layer_1_name = configure_layers["hidden_layer_1_name"]
     hidden_layer_1_activation = configure_layers["hidden_layer_1_activation"]
     hidden_layer_1_number_of_neurons = configure_layers["hidden_layer_1_number_of_neurons"]
+    hidden_layer_1_kernel_initializer = configure_layers["hidden_layer_1_kernel_initializer"]
     hidden_layer_2_name = configure_layers["hidden_layer_2_name"]
     hidden_layer_2_activation = configure_layers["hidden_layer_2_activation"]
     hidden_layer_2_number_of_neurons = configure_layers["hidden_layer_2_number_of_neurons"]
+    hidden_layer_2_kernel_initializer = configure_layers["hidden_layer_2_kernel_initializer"]
     output_layer_name = configure_layers["output_layer_name"]
     output_layer_activation = configure_layers["output_layer_activation"]
     output_layer_number_of_neurons = configure_layers["output_layer_number_of_neurons"]
@@ -144,10 +150,12 @@ def get_bn_model():
               tf.keras.layers.BatchNormalization(),
               tf.keras.layers.Dense(hidden_layer_1_number_of_neurons,
                                     activation=hidden_layer_1_activation,
+                                    kernel_initializer=hidden_layer_1_kernel_initializer,
                                     name=hidden_layer_1_name),
               tf.keras.layers.BatchNormalization(),
               tf.keras.layers.Dense(hidden_layer_2_number_of_neurons,
                                     activation=hidden_layer_2_activation,
+                                    kernel_initializer=hidden_layer_2_kernel_initializer,
                                     name=hidden_layer_2_name),
               tf.keras.layers.BatchNormalization(),
               tf.keras.layers.Dense(output_layer_number_of_neurons,

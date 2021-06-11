@@ -1,9 +1,6 @@
 import tensorflow as tf
-import sys
-# sys.path.insert(1, './src')
-sys.path.append('./src')
-from core.common_utils import get_parameters, get_data, get_scaled_train_validation_test_sets, basic_analysis
-from core.model_utils import *
+from src.core.common_utils import get_parameters, get_data, get_scaled_train_validation_test_sets, basic_analysis
+from src.core.model_utils import *
 
 
 if __name__ == "__main__":

@@ -1,10 +1,7 @@
 import numpy as np
-import sys
-
-sys.path.append('./src')
-from core.common_utils import get_parameters, get_data, get_scaled_train_validation_test_sets, basic_analysis
-from core.model_utils import *
-from transfer_learning.transfer_learning_ann_mnist import get_model_via_transfer_learning
+from src.core.common_utils import get_data, get_scaled_train_validation_test_sets
+from src.core.model_utils import *
+from transfer_learning_ann_mnist import get_model_via_transfer_learning
 
 
 def update_even_odd_labels(labels):

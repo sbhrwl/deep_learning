@@ -3,10 +3,7 @@ import pandas as pd
 import joblib
 
 from perceptron_model import Perceptron
-import sys
-
-sys.path.append('./src')
-from core.get_parameters import get_parameters
+from src.core.common_utils import get_parameters
 
 
 def predict(self, X):

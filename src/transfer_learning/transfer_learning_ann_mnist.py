@@ -1,8 +1,5 @@
 import tensorflow as tf
-import sys
-
-sys.path.append('./src')
-from core.common_utils import get_parameters
+from src.core.common_utils import get_parameters
 
 
 def get_model_via_transfer_learning():

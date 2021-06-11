@@ -3,9 +3,7 @@ from keras.models import Sequential
 from keras.wrappers.scikit_learn import KerasClassifier
 from keras.layers import Flatten, Dense, Activation, Dropout
 from sklearn.model_selection import GridSearchCV
-import sys
-sys.path.append('./src')
-from core.common_utils import get_parameters
+from src.core.common_utils import get_parameters
 
 
 def ann_hyper_parameter_tuning(X_train, y_train):
