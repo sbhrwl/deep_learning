@@ -15,6 +15,10 @@ python src/perceptron/perceptron.py
 * Sigmoid
 * Hyperbolic tangent
 * Relu (Relu and its variants Leaky Relu, Exponential LU, Parametric Relu)
+* Softmax
+* Maxout (ReLU and leaky ReLU are special cases of Maxout)
+* Swish
+* Softplus
 
 ### It is the Activation function, more precisely, different parts of activation function that gets activated with the "z" and results in fitting the  model to data
 * Boundary line for simple linear problems
@@ -130,13 +134,16 @@ Starting from bottom:
   * Dropout techniques:
 
 ### Observation on Early Stopping and Check-pointing
-accuracy      loss             restored_epoch   **stopped_epoch**
+```python
+accuracy          loss          restored_epoch          stopped_epoch
 0.9975454807	0.01011859719	          9	               14
-0.9937454462	0.0236865636		         11	               16
-0.9965272546	0.01463884022		        13		              18
-0.9928908944	0.02340739779		         5	               10
-0.9936727285	0.01931540295		         8	               13
-0.9849818349	0.04650410637		         3	                8
+0.9937454462	0.02368656360	         11	               16
+0.9965272546	0.01463884022	         13	               18
+0.9928908944	0.02340739779	          5	               10
+0.9936727285	0.01931540295	          8	               13
+0.9849818349	0.04650410637	          3	                8
+```
+
 ### Once Accuracy/Loss did not improve training stopped before max epoch which was set as **20**
 
 # Transfer Learning
