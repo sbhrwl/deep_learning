@@ -140,8 +140,21 @@ Starting from bottom:
 * Run 6: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation with **Bias as false** - Accuracy: 0.993
 * Run 7: batch_size: 100, epoch 20, Activation function: **sigmoid**, Optimizer: SGD - Accuracy: 0.922
 * Run 8: batch_size: 100, epoch 20, Activation function: sigmoid, Optimizer: **Adam** - Accuracy: **0.997**
-* Run 9: Weight initialization: Change relu with **he_normal**
+* Run 9: **Weight initialization**: Change relu with **he_normal**
   batch_size: 100, epoch 20, Activation function: relu, Optimizer: **Adam** - Accuracy: **0.998 Best so far**
+  
+  ## MlFlow experiments with Optimizers
+  Constant Parameters: batch_size: 100, epoch 20, Activation function: sigmoid, kernel_initializer: glorot_normal
+  
+  * Run 10: learning_rate: 0.001: 100, momentum: 0.0, nesterov: False - Accuracy: 0.561
+  * Run 11: learning_rate: 0.001: 100, **momentum**: 0.9, nesterov: False - Accuracy: 0.872
+  * Run 12: learning_rate: 0.001: 100, momentum: 0.9, **nesterov**: True - Accuracy: 0.871
+  
+  Constant Parameters: batch_size: 100, epoch 20, Activation function: **relu**, kernel_initializer: he_normal
+  * Run 13: learning_rate: 0.001: 100, momentum: 0.0, nesterov: False - Accuracy: 0.898
+  * Run 14: learning_rate: 0.001: 100, **momentum**: 0.9, nesterov: False - Accuracy: 0.961
+  * Run 15: learning_rate: 0.001: 100, momentum: 0.9, **nesterov**: True - Accuracy: 0.963
+ 
 * Run 10: Loss functions: Above observations are with **sparse_categorical_crossentropy**
 * Run 11: Regularisation techniques 
   * L1:
