@@ -11,6 +11,7 @@
 * [MNIST Dataset](#mNIST-dataset)
 * [Tuning Model](#tuning-model)
 * [MlFlow](#mlFlow)
+* [Observation on Early Stopping and Check-pointing](#observation-on-early-stopping-and-check-pointing
 * [Transfer Learning](#transfer-learning)
 
 # Perceptron
@@ -174,7 +175,7 @@ Starting from bottom:
   * L2:
   * Dropout techniques:
 
-## Observation on Early Stopping and Check-pointing
+# Observation on Early Stopping and Check-pointing
 ```python
 accuracy          loss          restored_epoch          stopped_epoch
 0.9975454807	0.01011859719	          9	               14
