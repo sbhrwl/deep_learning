@@ -84,7 +84,7 @@ Weights and Bias update formula derived with the help of Chain rule
 
 ### Gradient Descent
 * The derivative term in above formula is the Gradient Descent
-* As Derivative/Gradient (change in value of y with **small** change in value of x) gives direction  of **ASCENT**, hence in order to minimise loss we move in opposite direction therefore we reduce the original weight (negative sign in above formula)
+* As Derivative/Gradient (change in value of y with **small** change in value of x) gives direction  of **ASCENT**, hence in order to minimise loss we move in opposite direction **(Descent)** therefore we reduce the original weight (negative sign in above formula)
 * Different Optimizers can be tried to find this **Gradient** efficiently
 
 # Problems with ANN
@@ -99,7 +99,7 @@ Weights and Bias update formula derived with the help of Chain rule
 * To improve the training, we seek to reduce the **Internal Covariate Shift**. 
 * By fixing the **distribution of the hidden layer inputs** as the training progresses, we expect to improve the training speed. 
 * When values are Normalised, GD converges faster and hence results in faster training
-* Batch Normalisation introduces 4 parameters out of which only 2 are learnable parameters *(2 Extra trainiable parameters)
+* Batch Normalisation introduces 4 parameters out of which only 2 are learnable parameters *(2 Extra trainable parameters)
 * When uisng Batch Normalisation **before Activation**, then there is **no need to use bias** as becasue BN layer itself contains Beta term which is equivalent to Bias.
 * When uisng Batch Normalisation **after Activation**, then you need to use bias as activation function generally prefer input containing weights and biases.
 * Batch Normalisation is useful when we have deep neural networks (CNN)
