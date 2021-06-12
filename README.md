@@ -11,7 +11,7 @@
 * [MNIST Dataset](#mNIST-dataset)
 * [Tuning Model](#tuning-model)
 * [MlFlow](#mlFlow)
-* [Observation on Early Stopping and Check-pointing](#observation-on-early-stopping-and-check-pointing
+* [Observation on Early Stopping and Check-pointing](#observation-on-early-stopping-and-check-pointing)
 * [Transfer Learning](#transfer-learning)
 
 # Perceptron
