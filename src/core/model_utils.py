@@ -1,8 +1,39 @@
 import time
 import os
 import tensorflow as tf
+# from keras.optimizers import SGD, Adam
 import matplotlib.pyplot as plt
 from src.core.common_utils import get_parameters
+
+
+def get_learning_parameters():
+    # Learning setup
+    config = get_parameters()
+    model_learning_setup = config["model_learning_setup"]
+    model_learning_rate = model_learning_setup["learning_rate"]
+
+    if model_learning_setup["optimizer"] == "sgd":
+        sgd_momentum = model_learning_setup["momentum"]
+        sgd_nesterov = model_learning_setup["nesterov"]
+
+        optimizer = tf.keras.optimizers.SGD(learning_rate=model_learning_rate,
+                                            momentum=sgd_momentum,
+                                            nesterov=sgd_nesterov,
+                                            name='SGD'
+                                            )
+    else:
+        adam_beta_1 = model_learning_setup["beta_1"]
+        adam_beta_2 = model_learning_setup["beta_2"]
+        adam_epsilon = model_learning_setup["epsilon"]
+
+        optimizer = tf.keras.optimizers.Adam(learning_rate=model_learning_rate,
+                                             beta_1=adam_beta_1,
+                                             beta_2=adam_beta_2,
+                                             epsilon=adam_epsilon)
+
+    loss_function = model_learning_setup["loss_function"]
+    metrics = model_learning_setup["metrics"]
+    return loss_function, optimizer, metrics
 
 
 def get_basic_model():
@@ -38,12 +69,7 @@ def get_basic_model():
     print(tf_model.layers)
     print(tf_model.summary())
 
-    config = get_parameters()
-
-    model_metrics = config["model_metrics"]
-    loss_function = model_metrics["loss_function"]
-    optimizer = model_metrics["optimizer"]
-    metrics = model_metrics["metrics"]
+    loss_function, optimizer, metrics = get_learning_parameters()
 
     tf_model.compile(loss=loss_function,
                      optimizer=optimizer,
@@ -163,12 +189,7 @@ def get_bn_model():
     print(tf_model.layers)
     print(tf_model.summary())
 
-    config = get_parameters()
-
-    model_metrics = config["model_metrics"]
-    loss_function = model_metrics["loss_function"]
-    optimizer = model_metrics["optimizer"]
-    metrics = model_metrics["metrics"]
+    loss_function, optimizer, metrics = get_learning_parameters(tf_model)
 
     tf_model.compile(loss=loss_function,
                      optimizer=optimizer,
@@ -211,12 +232,7 @@ def get_bn_before_activation_function_model():
     print(tf_model.layers)
     print(tf_model.summary())
 
-    config = get_parameters()
-
-    model_metrics = config["model_metrics"]
-    loss_function = model_metrics["loss_function"]
-    optimizer = model_metrics["optimizer"]
-    metrics = model_metrics["metrics"]
+    loss_function, optimizer, metrics = get_learning_parameters(tf_model)
 
     tf_model.compile(loss=loss_function,
                      optimizer=optimizer,
@@ -226,7 +242,7 @@ def get_bn_before_activation_function_model():
 
 def get_model():
     config = get_parameters()
-    model_type = config["model_metrics"]["model_type"]
+    model_type = config["model_learning_setup"]["model_type"]
 
     if model_type == "batch_normalisation":
         model = get_bn_model()
