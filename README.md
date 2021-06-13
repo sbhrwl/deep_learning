@@ -158,8 +158,9 @@ Starting from bottom:
   batch_size: 100, epoch 20, Activation function: relu, Optimizer: **Adam** - Accuracy: **0.998 Best so far**
   
   ## MlFlow experiments with Optimizers
-  Constant Parameters: batch_size: 100, epoch 20, Activation function: sigmoid, kernel_initializer: glorot_normal
+  <img src='https://drive.google.com/uc?id=1EBeQ3Ec-xPW98yiSqa_-qrvpXJgLIkHO'>
   
+  Constant Parameters: batch_size: 100, epoch 20, Activation function: sigmoid, kernel_initializer: glorot_normal
   * Run 10: learning_rate: 0.001: 100, momentum: 0.0, nesterov: False - Accuracy: 0.561
   * Run 11: learning_rate: 0.001: 100, **momentum**: 0.9, nesterov: False - Accuracy: 0.872
   * Run 12: learning_rate: 0.001: 100, momentum: 0.9, **nesterov**: True - Accuracy: 0.871
@@ -168,9 +169,11 @@ Starting from bottom:
   * Run 13: learning_rate: 0.001: 100, momentum: 0.0, nesterov: False - Accuracy: 0.898
   * Run 14: learning_rate: 0.001: 100, **momentum**: 0.9, nesterov: False - Accuracy: 0.961
   * Run 15: learning_rate: 0.001: 100, momentum: 0.9, **nesterov**: True - Accuracy: 0.963
- 
-* Run 10: Loss functions: Above observations are with **sparse_categorical_crossentropy**
-* Run 11: Regularisation techniques 
+  
+  ## MlFlow experiments with Loss Functions 
+  Above observations are with **sparse_categorical_crossentropy**
+  
+  ## MlFlow experiments with Regularisation techniques 
   * L1:
   * L2:
   * Dropout techniques:
