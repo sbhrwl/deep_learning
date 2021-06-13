@@ -10,7 +10,7 @@
 * [Batch Normalisation](#batch-normalisation)
 * [MNIST Dataset](#mNIST-dataset)
 * [Tuning Model](#tuning-model)
-* [MlFlow](#mlFlow)
+* [MlFlow Experiments](#mlFlow-experiments)
 * [Observation on Early Stopping and Check-pointing](#observation-on-early-stopping-and-check-pointing)
 * [Transfer Learning](#transfer-learning)
 
@@ -137,7 +137,7 @@ Tuning a particular model can be splitted as below
    * Batch size (As all the data connot be fed at once in the neural network while training, because of the RAM memory constraints we feed data into batches)
    * etc..
 
-# MlFlow
+# MlFlow Experiments
 MlFLow helps by tracking different experiments that we can do with the various training parameters and model metrics.
 ```python
 python src/mlflow_ann_mnist/mlflow_ann_mnist.py
