@@ -1,5 +1,5 @@
 import tensorflow as tf
-from src.core.common_utils import get_parameters, get_data, get_scaled_train_validation_test_sets, basic_analysis
+from src.core.common_utils import get_data, get_scaled_train_validation_test_sets, basic_analysis
 from src.core.model_utils import *
 
 

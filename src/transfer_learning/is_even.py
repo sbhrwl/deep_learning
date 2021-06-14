@@ -1,7 +1,7 @@
 import numpy as np
 from src.core.common_utils import get_data, get_scaled_train_validation_test_sets
 from src.core.model_utils import *
-from transfer_learning_ann_mnist import get_model_via_transfer_learning
+from transfer_learning import get_model_via_transfer_learning
 
 
 def update_even_odd_labels(labels):
@@ -23,7 +23,7 @@ if __name__ == "__main__":
     print(np.unique(y_validation_binary))
 
     # Step 4: Get Model Via transfer learning
-    model = get_model_via_transfer_learning()
+    model = get_model_via_transfer_learning("yes")
     print("New_model Summary")
     print(model.summary())
 

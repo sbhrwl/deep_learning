@@ -18,13 +18,12 @@ mlflow_config:
   tensorflow_auto_log_every_n_iter: 2
   # 2: mlflow will log the training metrics (loss, accuracy, and validation loss etc.) every 2 epochs
 
-
 model_learning_setup:
   model_type: "basic" # basic, batch_normalisation, batch_normalisation_without_bias
-  optimizer: "adam" # "sgd" "adam"
+  optimizer: "sgd" # "sgd" "adam"
   learning_rate: 0.001
   momentum: 0.9 # 0.0
-  nesterov: True # False
+  nesterov: True # False True
   beta_1: 0.9
   beta_2: 0.999
   epsilon: 0.000001 # 1e-08
@@ -37,13 +36,13 @@ model_training_parameters:
   batch: 100
   configure_layers:
     hidden_layer_1_name: hidden_layer_1
-    hidden_layer_1_activation: relu
+    hidden_layer_1_activation: relu # sigmoid, relu
     hidden_layer_1_number_of_neurons: 300
      # for sigmoid and tanh "glorot_uniform" "glorot_normal", xavier ~glorot
      # for ReLU "he_uniform" "he_normal"
     hidden_layer_1_kernel_initializer: he_normal
     hidden_layer_2_name: hidden_layer_2
-    hidden_layer_2_activation: sigmoid
+    hidden_layer_2_activation: relu
     hidden_layer_2_number_of_neurons: 100
     hidden_layer_2_kernel_initializer: he_normal
     output_layer_name: output_layer
@@ -52,8 +51,10 @@ model_training_parameters:
 
 model_transfer_learning:
   model_to_load: artifacts/ann-mnist-model/Model_2021_06_07_20_19_03_.h5
-  new_layer_activation: "softmax" # "softmax" "binary"
-  new_layer_name: "NewOutputLayer"
+  new_layer_activation: relu
+  new_layer_name: hidden_layer_3
+  new_output_layer_name: new_output_layer
+  new_output_layer_activation: softmax # softmax binary
 
 hyper_parameter_tuning:
   number_of_hidden_layers: [20, (40, 20), (45, 30, 15)]

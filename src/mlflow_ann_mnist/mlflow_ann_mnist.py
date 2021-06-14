@@ -1,8 +1,8 @@
 import tensorflow as tf
 import mlflow.tensorflow
-from src.core.common_utils import get_parameters, get_data, get_scaled_train_validation_test_sets
+from src.core.common_utils import get_data, get_scaled_train_validation_test_sets
 from src.core.model_utils import *
-from ann_hyper_parameter_tuning import ann_hyper_parameter_tuning
+# from ann_hyper_parameter_tuning import ann_hyper_parameter_tuning
 
 
 if __name__ == "__main__":
@@ -36,8 +36,8 @@ if __name__ == "__main__":
 
     # Step 6: Train
     VALIDATION_SET = (X_validation, y_validation)
-    # train_model(model, X_train, y_train, VALIDATION_SET)
-    ann_hyper_parameter_tuning(X_train, y_train)
+    train_model(model, X_train, y_train, VALIDATION_SET)
+    # ann_hyper_parameter_tuning(X_train, y_train)
     mlflow.end_run()
 
 # mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./artifacts/mlflow-artifacts --host 0.0.0.0 -p 1234

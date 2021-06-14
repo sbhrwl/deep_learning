@@ -3,7 +3,7 @@ from src.core.common_utils import get_parameters
 from src.core.model_utils import get_learning_parameters
 
 
-def get_model_via_transfer_learning():
+def get_model_via_transfer_learning(is_even):
     print(f"Tensorflow Version: {tf.__version__}")
     print(f"Keras Version: {tf.keras.__version__}")
     config = get_parameters()
@@ -12,6 +12,8 @@ def get_model_via_transfer_learning():
     model_to_load = model_transfer_learning["model_to_load"]
     new_layer_activation = model_transfer_learning["new_layer_activation"]
     new_layer_name = model_transfer_learning["new_layer_name"]
+    new_output_layer_activation = model_transfer_learning["new_output_layer_activation"]
+    new_output_layer_name = model_transfer_learning["new_output_layer_name"]
 
     # Step 1: Load Previous model
     model = tf.keras.models.load_model(model_to_load)
@@ -33,7 +35,12 @@ def get_model_via_transfer_learning():
     lower_pretrained_layers = model.layers[:-1]
 
     new_model = tf.keras.models.Sequential(lower_pretrained_layers)
-    new_model.add(tf.keras.layers.Dense(2, activation=new_layer_activation, name=new_layer_name))
+    if is_even == "yes":
+        new_model.add(tf.keras.layers.Dense(2, activation=new_layer_activation, name=new_layer_name))
+    else:
+        new_model.add(tf.keras.layers.Dense(50, activation=new_layer_activation, name=new_layer_name))
+        new_model.add(tf.keras.layers.Dense(10, activation=new_output_layer_activation, name=new_output_layer_name))
+
     loss_function, optimizer, metrics = get_learning_parameters()
 
     new_model.compile(loss=loss_function,
