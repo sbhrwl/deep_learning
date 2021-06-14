@@ -210,12 +210,38 @@ accuracy          loss          restored_epoch          stopped_epoch
     lower_pretrained_layers = model.layers[:-1]
 
     new_model = tf.keras.models.Sequential(lower_pretrained_layers)
-    new_model.add(
-        tf.keras.layers.Dense(2, activation="softmax", name="NewOutputLayer")
-        # tf.keras.layers.Dense(2, activation="binary")
-    )
+    if is_even == "yes":
+        new_model.add(tf.keras.layers.Dense(2, activation=new_layer_activation, name=new_layer_name))
+    else:
+        new_model.add(tf.keras.layers.Dense(50, activation=new_layer_activation, name=new_layer_name))
+        new_model.add(tf.keras.layers.Dense(10, activation=new_output_layer_activation, name=new_output_layer_name))
   ```
 * Train the new Model which now already has weights for older layers
+
+```
+Layer (type)                 Output Shape              Param #
+=================================================================
+InputLayer (Flatten)         (None, 784)               0
+_________________________________________________________________
+hidden_layer_1 (Dense)       (None, 300)               235500
+_________________________________________________________________
+hidden_layer_2 (Dense)       (None, 100)               30100
+_________________________________________________________________
+hidden_layer_3 (Dense)       (None, 50)                5050
+_________________________________________________________________
+new_output_layer (Dense)     (None, 10)                510
+=================================================================
+Total params: 271,160
+Trainable params: 5,560
+Non-trainable params: 265,600
+_________________________________________________________________
+```
+* Trainable parameters are only from the new layer plus new output layer (5560)
+```python
+python src/transfer_learning/ann_mnist_transfer_learning.py
+```
+
+## Use Case: Is the Number even?
 * We will train it to get weights for new layer(s) added to the model to suit our use case (example: Is the numer Even?)
 ```python
 python src/transfer_learning/is_even.py
