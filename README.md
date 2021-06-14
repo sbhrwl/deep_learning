@@ -57,7 +57,7 @@ There are different choices for Activation functions
 * Gradient staturation means **gradient tends to zero** which results into zero or neglegible weight updates.  
 
 # Cost function
-* Now we have Output from MLP (**y hat**), here onwards ANN and we also know the Actual Output (**y**).
+* We now have the output from ANN (**y hat**) and we also know the Actual Output (**y**).
 * Using y hat and y, we calculate error/loss made by the model/network using **Cost functions**
 * Options for Cost functions depends on problem to solve
   * Regression
@@ -81,12 +81,20 @@ To minimise loss we perform **Gradient Descent**. The entity that performs gradi
 
 Weights and Bias update formula derived with the help of Chain rule
 
-<img src='https://drive.google.com/uc?id=1jmL4SjzUwuv8xfiTo1sAWce5w8cfoGPT'>
+<img src='https://drive.google.com/uc?id=1jmL4SjzUwuv8xfiTo1sAWce5w8cfoGPT'  width=600>
 
 ### Gradient Descent
 * The derivative term in above formula is the Gradient Descent
 * As Derivative/Gradient (change in value of y with **small** change in value of x) gives direction  of **ASCENT**, hence in order to minimise loss we move in opposite direction **(Descent)** therefore we reduce the original weight (negative sign in above formula)
 * Different Optimizers can be tried to find this **Gradient** efficiently
+
+#### Weights Initialised on negative side
+* Learning rate is +ve, Gradient is -ve, 
+* Product of Learning rate and Gradient will be **NEGATIVE**
+* As we have Initialised weights on -ve side, so as per weight update formula we would increase the **NEGATIVE** number
+* Which would eventually mean, moving towards the **ZERO**
+
+<img src='https://drive.google.com/uc?id=1y-9E1Ps_uVCxjPUn7gdWo793pTku2TdM' width=400>
 
 # Problems with ANN
 * Vanishing Gradient: When using sigmoid activation function at Hidden layers
