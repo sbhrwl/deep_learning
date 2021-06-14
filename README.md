@@ -249,3 +249,4 @@ python src/transfer_learning/is_even.py
 
 * Latex: https://latex.codecogs.com/eqneditor/editor.php
 * Netron: https://netron.app/
+* Sketch: https://app.sketchup.com/app?hl=en#
