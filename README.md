@@ -8,8 +8,10 @@
 * [Backpropogation with chain rule](#backpropogation-with-chain-rule)
 * [Problems with ANN](#problems-with-aNN)
 * [Batch Normalisation](#batch-normalisation)
+* [MNIST Dataset](#mNIST-dataset)
 * [Tuning Model](#tuning-model)
-* [MlFlow](#mlFlow)
+* [MlFlow Experiments](#mlFlow-experiments)
+* [Observation on Early Stopping and Check-pointing](#observation-on-early-stopping-and-check-pointing)
 * [Transfer Learning](#transfer-learning)
 
 # Perceptron
@@ -26,7 +28,7 @@ python src/perceptron/perceptron.py
 # Multi Layer Perceptron
 * Perceptron is limited to solving basic problem, if we were to build a model that could imitate XOR gate, we need more than one perceptron
 * So, in order to solve real world problems, we need different permutations and combinations of **Perceptron**, which results in MLP.
-* MLP is the building block of complex Artificial Neural Network
+* MLP can be considered as a subset of Artificial Neural Networks or Deep Neural Networks
 
 <img src="https://i.stack.imgur.com/n2Hde.png" width=40% ali>
 
@@ -45,9 +47,17 @@ There are different choices for Activation functions
 * Curves for non linear problems
 * **Squiggles** for complex non linear problems
 
-# Cost function
+## Dying ReLu
+* Dying ReLu can occure if your dataset contains negative values.
+* Negative values results in zero acivation hence no weight update.
 
-* Now we have Output from MLP (**y hat**), here onwards ANN and we also know the Actual Output (**y**).
+## Gradient Saturation
+* Gradient Saturation is caused when you use sigmoid or tanh like functions
+* sigmoid or tanh function have almost zero gradient on their **ends** (refer graph to understand this). 
+* Gradient staturation means **gradient tends to zero** which results into zero or neglegible weight updates.  
+
+# Cost function
+* We now have the output from ANN (**y hat**) and we also know the Actual Output (**y**).
 * Using y hat and y, we calculate error/loss made by the model/network using **Cost functions**
 * Options for Cost functions depends on problem to solve
   * Regression
@@ -56,7 +66,6 @@ There are different choices for Activation functions
     * CrossEntropy or Log Loss /Hinge Loss
 
 # Optimizers
-
 To minimise loss we perform **Gradient Descent**. The entity that performs gradient descent is termed as **Optimizer**
 * Optimizers choices that works purely based on **previous weights**
   * SGD Momentum
@@ -67,24 +76,25 @@ To minimise loss we perform **Gradient Descent**. The entity that performs gradi
   * RMSPROP 
 
 # Backpropogation with chain rule
-
 ## Question: For ANNs, how do we find the weights and biases so that we get minimum value for Loss/Cost function?
-
 ## Solution: Backpropogation with chain rule
 
 Weights and Bias update formula derived with the help of Chain rule
 
-<img src='https://drive.google.com/uc?id=1jmL4SjzUwuv8xfiTo1sAWce5w8cfoGPT'>
+<img src='https://drive.google.com/uc?id=1jmL4SjzUwuv8xfiTo1sAWce5w8cfoGPT'  width=600>
 
 ### Gradient Descent
 * The derivative term in above formula is the Gradient Descent
-* As Derivative/Gradient (change in value of y with **small** change in value of x) gives direction  of **ASCENT**, hence in order to minimise loss we move in opposite direction therefore we reduce the original weight (negative sign in above formula)
+* As Derivative/Gradient (change in value of y with **small** change in value of x) gives direction  of **ASCENT**, hence in order to minimise loss we move in opposite direction **(Descent)** therefore we reduce the original weight (negative sign in above formula)
 * Different Optimizers can be tried to find this **Gradient** efficiently
 
-### ANN Model on MNIST dataset
-```python
-python src/ann_mnist_basic_model/ann_mnist_basic_model.py
-```
+#### Weights Initialised on negative side
+* Learning rate is +ve, Gradient is -ve, 
+* Product of Learning rate and Gradient will be **NEGATIVE** (slope/tangent/Tan Theta > 90 degrees is a **negative** number)
+* As we have Initialised weights on -ve side, so as per weight update formula we would increase the **NEGATIVE** number
+* Which would eventually mean, moving towards the **ZERO**
+
+<img src='https://drive.google.com/uc?id=1y-9E1Ps_uVCxjPUn7gdWo793pTku2TdM' width=400>
 
 # Problems with ANN
 * Vanishing Gradient: When using sigmoid activation function at Hidden layers
@@ -96,9 +106,11 @@ python src/ann_mnist_basic_model/ann_mnist_basic_model.py
 
 # Batch Normalisation
 * To improve the training, we seek to reduce the **Internal Covariate Shift**. 
-* By fixing the **distribution of the hidden layer inputs** as the training
-progresses, we expect to improve the training speed. 
+* By fixing the **distribution of the hidden layer inputs** as the training progresses, we expect to improve the training speed. 
 * When values are Normalised, GD converges faster and hence results in faster training
+* Batch Normalisation introduces 4 parameters out of which only 2 are learnable parameters *(2 Extra trainable parameters)
+* When uisng Batch Normalisation **before Activation**, then there is **no need to use bias** as becasue BN layer itself contains Beta term which is equivalent to Bias.
+* When uisng Batch Normalisation **after Activation**, then you need to use bias as activation function generally prefer input containing weights and biases.
 * Batch Normalisation is useful when we have deep neural networks (CNN)
 * Recommendation: When our network has more than **16** layers use Batch Normalisation
 
@@ -107,8 +119,18 @@ progresses, we expect to improve the training speed.
 python src/batch_normalisation/bn_mnist.py
 ```
 
-# Tuning Model
+# MNIST Dataset
+* Each image is a 28*28 matrix 
+* To feed them in Neural network we have to make them in a single row or array, so we perform **Flatten** operation
+* 60,000 images are fed to ANN as 60,000 arrays. 
+* With **CNN** we directly feed the image without flattening operation.
 
+## ANN Model on MNIST dataset
+```python
+python src/ann_mnist_basic_model/ann_mnist_basic_model.py
+```
+
+# Tuning Model
 Tuning a particular model can be splitted as below
 * Architecture of Model: 
    * Number of Hidden Layers in the model, 
@@ -120,10 +142,10 @@ Tuning a particular model can be splitted as below
    * Cost/Loss Function
 * Training Parameters: 
    * Epochs
-   * Batch size
+   * Batch size (As all the data connot be fed at once in the neural network while training, because of the RAM memory constraints we feed data into batches)
    * etc..
 
-# MlFlow
+# MlFlow Experiments
 MlFLow helps by tracking different experiments that we can do with the various training parameters and model metrics.
 ```python
 python src/mlflow_ann_mnist/mlflow_ann_mnist.py
@@ -140,15 +162,31 @@ Starting from bottom:
 * Run 6: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation with **Bias as false** - Accuracy: 0.993
 * Run 7: batch_size: 100, epoch 20, Activation function: **sigmoid**, Optimizer: SGD - Accuracy: 0.922
 * Run 8: batch_size: 100, epoch 20, Activation function: sigmoid, Optimizer: **Adam** - Accuracy: **0.997**
-* Run 9: Weight initialization: Change relu with **he_normal**
+* Run 9: **Weight initialization**: Change relu with **he_normal**
   batch_size: 100, epoch 20, Activation function: relu, Optimizer: **Adam** - Accuracy: **0.998 Best so far**
-* Run 10: Loss functions: Above observations are with **sparse_categorical_crossentropy**
-* Run 11: Regularisation techniques 
+  
+  ## MlFlow experiments with Optimizers
+  <img src='https://drive.google.com/uc?id=1EBeQ3Ec-xPW98yiSqa_-qrvpXJgLIkHO'>
+  
+  Constant Parameters: batch_size: 100, epoch 20, Activation function: sigmoid, kernel_initializer: glorot_normal
+  * Run 10: learning_rate: 0.001: 100, momentum: 0.0, nesterov: False - Accuracy: 0.561
+  * Run 11: learning_rate: 0.001: 100, **momentum**: 0.9, nesterov: False - Accuracy: 0.872
+  * Run 12: learning_rate: 0.001: 100, momentum: 0.9, **nesterov**: True - Accuracy: 0.871
+  
+  Constant Parameters: batch_size: 100, epoch 20, Activation function: **relu**, kernel_initializer: he_normal
+  * Run 13: learning_rate: 0.001: 100, momentum: 0.0, nesterov: False - Accuracy: 0.898
+  * Run 14: learning_rate: 0.001: 100, **momentum**: 0.9, nesterov: False - Accuracy: 0.961
+  * Run 15: learning_rate: 0.001: 100, momentum: 0.9, **nesterov**: True - Accuracy: 0.963
+  
+  ## MlFlow experiments with Loss Functions 
+  Above observations are with **sparse_categorical_crossentropy**
+  
+  ## MlFlow experiments with Regularisation techniques 
   * L1:
   * L2:
   * Dropout techniques:
 
-## Observation on Early Stopping and Check-pointing
+# Observation on Early Stopping and Check-pointing
 ```python
 accuracy          loss          restored_epoch          stopped_epoch
 0.9975454807	0.01011859719	          9	               14
@@ -182,3 +220,6 @@ accuracy          loss          restored_epoch          stopped_epoch
 ```python
 python src/transfer_learning/is_even.py
 ```
+
+* Latex: https://latex.codecogs.com/eqneditor/editor.php
+* Netron: https://netron.app/
