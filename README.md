@@ -90,7 +90,7 @@ Weights and Bias update formula derived with the help of Chain rule
 
 #### Weights Initialised on negative side
 * Learning rate is +ve, Gradient is -ve, 
-* Product of Learning rate and Gradient will be **NEGATIVE**
+* Product of Learning rate and Gradient will be **NEGATIVE** (slope/tangent/Tan Theta > 90 degrees is a **negative** number)
 * As we have Initialised weights on -ve side, so as per weight update formula we would increase the **NEGATIVE** number
 * Which would eventually mean, moving towards the **ZERO**
 
