@@ -81,7 +81,7 @@ To minimise loss we perform **Gradient Descent**. The entity that performs gradi
 
 Weights and Bias update formula derived with the help of Chain rule
 
-Consider belwo Neural Network
+Consider below Neural Network
 
 <img src='https://drive.google.com/uc?id=1EBK3v15DL_Mk6mNswaW8094pSHGfr3fX'  width=1000>
 
