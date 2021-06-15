@@ -93,7 +93,6 @@ Weights and Bias update formula derived with the help of Chain rule
 * Product of Learning rate and Gradient will be **NEGATIVE** (slope/tangent/Tan Theta > 90 degrees is a **negative** number)
 * As we have Initialised weights on -ve side, so as per weight update formula we would increase the **NEGATIVE** number
 * Which would eventually mean, moving towards the **ZERO**
-
 <img src='https://drive.google.com/uc?id=1y-9E1Ps_uVCxjPUn7gdWo793pTku2TdM' width=400>
 
 # Problems with ANN
@@ -102,7 +101,11 @@ Weights and Bias update formula derived with the help of Chain rule
 
 ## Activation Functions and Weight Initalisation Recommendation
 
-<img src='https://drive.google.com/uc?id=17l9srUriABuaZ4JEKJGz7r2drMHFQ0jb'>
+| Initialisation  | Activation function              |
+| --------------- | -------------------------------- |
+| Glorot          | None, Tanh, Sigmoid and Softmax  |
+| He              | Relu and its variants            |
+| LeCum           | Selu                             |
 
 # Batch Normalisation
 * To improve the training, we seek to reduce the **Internal Covariate Shift**. 
