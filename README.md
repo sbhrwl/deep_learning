@@ -81,7 +81,29 @@ To minimise loss we perform **Gradient Descent**. The entity that performs gradi
 
 Weights and Bias update formula derived with the help of Chain rule
 
-<img src='https://drive.google.com/uc?id=1jmL4SjzUwuv8xfiTo1sAWce5w8cfoGPT'  width=600>
+Consider belwo Neural Network
+
+<img src='https://drive.google.com/uc?id=1EBK3v15DL_Mk6mNswaW8094pSHGfr3fX'  width=1000>
+
+* x1: Input to the NN
+* a0: Activation at Buffer layer (No activation)
+* w1: weight Initialised for Hidden layer 1
+* z1: The dot product of weight and inputs (adding bias) for Hidden layer 1
+* a1: Output of Hidden layer after **applying activation** to the dot product of weight and inputs (adding bias)
+* w2: weight Initialised for Hidden layer 2
+* z2: The dot product of weight and inputs (adding bias) for Hidden layer 2
+* **a2**: Output of Hidden layer after **applying activation** to the dot product of weight and inputs (adding bias)
+* a2 is **yhat** output of the Neural network
+
+## Cost function for the NN 
+<img src="https://render.githubusercontent.com/render/math?math=Error = (y - \hat{y})^{2} = (y - a_{2})^{2} \rightarrow f(a_{2})">
+<img src="https://render.githubusercontent.com/render/math?math=a_{2} = \sigma (z_{2}) \rightarrow f(z_{2})">
+<img src="https://render.githubusercontent.com/render/math?math=z_{2} = w_{2}az_{1} + b_{2} \rightarrow f(w_{2}, a_{1}, b_{2})">
+<img src="https://render.githubusercontent.com/render/math?math=w = w - \eta\frac{\partial y}{\partial x}">
+<img src="https://render.githubusercontent.com/render/math?math=\frac{\partial e}{\partial w_{2}} = \frac{\partial e}{\partial a_{2}}.\frac{\partial a_{2}}{\partial z_{2}}.\frac{\partial z_{2}}{\partial w_{2}}">
+
+
+
 
 ### Gradient Descent
 * The derivative term in above formula is the Gradient Descent
