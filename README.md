@@ -95,15 +95,32 @@ Consider belwo Neural Network
 * **a2**: Output of Hidden layer after **applying activation** to the dot product of weight and inputs (adding bias)
 * a2 is **yhat** output of the Neural network
 
-## Cost function for the NN 
-<img src="https://render.githubusercontent.com/render/math?math=Error = (y - \hat{y})^{2} = (y - a_{2})^{2} \rightarrow f(a_{2})">
+### Cost function for the NN as a function of w2
+<img src="https://render.githubusercontent.com/render/math?math=Error(e) = (y - \hat{y})^{2} = (y - a_{2})^{2} \rightarrow f(a_{2})">
+
 <img src="https://render.githubusercontent.com/render/math?math=a_{2} = \sigma (z_{2}) \rightarrow f(z_{2})">
-<img src="https://render.githubusercontent.com/render/math?math=z_{2} = w_{2}az_{1} + b_{2} \rightarrow f(w_{2}, a_{1}, b_{2})">
+<img src="https://render.githubusercontent.com/render/math?math=z_{2} = w_{2}a_{1} \rightarrow f(w_{2}, a_{1})">
+
+### Weight Update formula
 <img src="https://render.githubusercontent.com/render/math?math=w = w - \eta\frac{\partial y}{\partial x}">
+
+### Applying Chain rule to calculate **new weight w2**
 <img src="https://render.githubusercontent.com/render/math?math=\frac{\partial e}{\partial w_{2}} = \frac{\partial e}{\partial a_{2}}.\frac{\partial a_{2}}{\partial z_{2}}.\frac{\partial z_{2}}{\partial w_{2}}">
 
+### Cost function for the NN as a function of w1
+<img src="https://render.githubusercontent.com/render/math?math=a_{1} = \sigma (z_{1}) \rightarrow f(z_{1})">
+<img src="https://render.githubusercontent.com/render/math?math=z_{1} = w_{1}a_{0} \rightarrow f(w_{1}, a_{0})">
 
+### Weight Update formula
+<img src="https://render.githubusercontent.com/render/math?math=w = w - \eta\frac{\partial y}{\partial x}">
 
+### Applying Chain rule to calculate **new weight w1**
+<img src="https://render.githubusercontent.com/render/math?math=\frac{\partial e}{\partial w_{1}} = \frac{\partial e}{\partial a_{2}}.\frac{\partial a_{2}}{\partial z_{2}}.\frac{\partial z_{2}}{\partial a_{1}}.\frac{\partial a_{1}}{\partial z_{1}}.\frac{\partial z_{1}}{\partial w_{1}}">
+
+* With same approach we can find updated **Biases** as well
+* In the end, we would have a weight metrix and a bias matrix for the whole NN
+<img src="https://render.githubusercontent.com/render/math?math=\begin{bmatrix}w1\\ w2\\ ..\\wn\end{bmatrix}">
+<img src="https://render.githubusercontent.com/render/math?math=\begin{bmatrix}b1\\ b2\\ ..\\bn\end{bmatrix}">
 
 ### Gradient Descent
 * The derivative term in above formula is the Gradient Descent
