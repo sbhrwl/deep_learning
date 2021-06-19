@@ -69,9 +69,35 @@ There are different choices for Activation functions
 To minimise loss we perform **Gradient Descent**. The entity that performs gradient descent is termed as **Optimizer**
 * Optimizers choices that works purely based on **previous weights**
   * SGD Momentum
+     * SGD with Momentum is based on the basic concept of terminal velocity.
+     * This alogrithm introduces a new term **momentum (m)** in the weight update formaula
+     
+          <img src="https://render.githubusercontent.com/render/math?math=w = w - m">
+          
+          where m is given by below equation
+          
+          <img src="https://render.githubusercontent.com/render/math?math=m = \beta m - \eta\frac{\partial y}{\partial x}">
+          
+          **Beta** coefficient of momentum (Usualyy the value of Beta is 0.9
+          
+          Example weight update for W3 can be written as 
+          
+          Latex not inserting **+** sign properly
+          
+          <img src="https://render.githubusercontent.com/render/math?math=m_{3} = \eta \left [ \beta ^{2} \frac{\partial y}{\partial x} |_{w =w_{0}} + \beta \frac{\partial y}{\partial x} |_{w =w_{1}} + \frac{\partial y}{\partial x} |_{w =w_{0}}\right ]">
+          
+     * <img src='https://drive.google.com/uc?id=1yamlvVvYPi2QwOrRnX6356dg_0ddBOkB'  width=300>        
+          
+     * <img src="https://render.githubusercontent.com/render/math?math=w_{3} = w_{2} - m_{3}">
+          
+  * Nesterov Accelerated Gradient
+    * Calculates Gradient slightly ahead in the direction of momentum
+    * Weight updates are not done when it is close to the flat slope and hence prevents **Oscilations**
   * ADAM (Adaptive Moment Estimation)
 * Optimizers choices that also considers **previous Learning Rates**
   * AdaGrad
+    * AdaGrad solves **elongated bowl problem**
+    * AdaGrad helps to correct the direction of graident initially
   * AdaGradDelta
   * RMSPROP 
 
