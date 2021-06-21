@@ -127,59 +127,23 @@ python src/batch_normalisation/bn_mnist.py
 
 ## Optimizers
 To minimise loss we perform **Gradient Descent**. The entity that performs gradient descent is termed as **Optimizer**
-* Optimizers choices that works purely based on **previous weights**
-  * SGD Momentum
-     * SGD with Momentum is based on the basic concept of terminal velocity.
-     * This alogrithm introduces a new term **momentum (m)** in the weight update formaula
-     
-          <img src="https://render.githubusercontent.com/render/math?math=w = w - m">
-          
-          where m is given by below equation
-          
-          <img src="https://render.githubusercontent.com/render/math?math=m = \beta m - \eta\frac{\partial y}{\partial x}">
-          
-          **Beta** coefficient of momentum (Usualyy the value of Beta is 0.9
-          
-          Example weight update for W3 can be written as 
-          
-          Latex not inserting **+** sign properly
-          
-          <img src="https://render.githubusercontent.com/render/math?math=m_{3} = \eta \left [ \beta ^{2} \frac{\partial y}{\partial x} |_{w =w_{0}} + \beta \frac{\partial y}{\partial x} |_{w =w_{1}} + \frac{\partial y}{\partial x} |_{w =w_{0}}\right ]">
-          
-     * <img src='https://drive.google.com/uc?id=1yamlvVvYPi2QwOrRnX6356dg_0ddBOkB'  width=300>        
-          
-     * <img src="https://render.githubusercontent.com/render/math?math=w_{3} = w_{2} - m_{3}">
-          
-  * Nesterov Accelerated Gradient
-    * Calculates Gradient slightly ahead in the direction of momentum
-    * Weight updates are not done when it is close to the flat slope and hence prevents **Oscilations**
-  * ADAM (Adaptive Moment Estimation)
-* Optimizers choices that also considers **previous Learning Rates**
-  * AdaGrad
-    * AdaGrad solves **elongated bowl problem**
-    * AdaGrad helps to correct the direction of graident initially
-  * AdaGradDelta
-  * RMSPROP 
-
 ### Backpropogation with chain rule
 #### Question: For ANNs, how do we find the weights and biases so that we get minimum value for Loss/Cost function?
 #### Solution: Backpropogation with chain rule
-
-Weights and Bias update formula derived with the help of Chain rule
-
-Consider below Neural Network
+* Weights and Bias update formula derived with the help of Chain rule
+* Consider below Neural Network
 
 <img src='https://drive.google.com/uc?id=1EBK3v15DL_Mk6mNswaW8094pSHGfr3fX'  width=1000>
 
-* x1: Input to the NN
-* a0: Activation at Buffer layer (No activation)
-* w1: weight Initialised for Hidden layer 1
-* z1: The dot product of weight and inputs (adding bias) for Hidden layer 1
-* a1: Output of Hidden layer after **applying activation** to the dot product of weight and inputs (adding bias)
-* w2: weight Initialised for Hidden layer 2
-* z2: The dot product of weight and inputs (adding bias) for Hidden layer 2
-* **a2**: Output of Hidden layer after **applying activation** to the dot product of weight and inputs (adding bias)
-* a2 is **yhat** output of the Neural network
+  * x1: Input to the NN
+  * a0: Activation at Buffer layer (No activation)
+  * w1: weight Initialised for Hidden layer 1
+  * z1: The dot product of weight and inputs (adding bias) for Hidden layer 1
+  * a1: Output of Hidden layer after **applying activation** to the dot product of weight and inputs (adding bias)
+  * w2: weight Initialised for Hidden layer 2
+  * z2: The dot product of weight and inputs (adding bias) for Hidden layer 2
+  * **a2**: Output of Hidden layer after **applying activation** to the dot product of weight and inputs (adding bias)
+  * a2 is **yhat** output of the Neural network
 
 ### Cost function for the NN as a function of w2
 <img src="https://render.githubusercontent.com/render/math?math=Error(e) = (y - \hat{y})^{2} = (y - a_{2})^{2} \rightarrow f(a_{2})">
@@ -219,6 +183,40 @@ Consider below Neural Network
 * As we have Initialised weights on -ve side, so as per weight update formula we would increase the **NEGATIVE** number
 * Which would eventually mean, moving towards the **ZERO**
 <img src='https://drive.google.com/uc?id=1y-9E1Ps_uVCxjPUn7gdWo793pTku2TdM' width=400>
+
+* Optimizers choices that works purely based on **previous weights**
+  * SGD Momentum
+     * SGD with Momentum is based on the basic concept of terminal velocity.
+     * This alogrithm introduces a new term **momentum (m)** in the weight update formaula
+     
+          <img src="https://render.githubusercontent.com/render/math?math=w = w - m">
+          
+          where m is given by below equation
+          
+          <img src="https://render.githubusercontent.com/render/math?math=m = \beta m - \eta\frac{\partial y}{\partial x}">
+          
+          **Beta** coefficient of momentum (Usualyy the value of Beta is 0.9
+          
+          Example weight update for W3 can be written as 
+          
+          Latex not inserting **+** sign properly
+          
+          <img src="https://render.githubusercontent.com/render/math?math=m_{3} = \eta \left [ \beta ^{2} \frac{\partial y}{\partial x} |_{w =w_{0}} + \beta \frac{\partial y}{\partial x} |_{w =w_{1}} + \frac{\partial y}{\partial x} |_{w =w_{0}}\right ]">
+          
+     * <img src='https://drive.google.com/uc?id=1yamlvVvYPi2QwOrRnX6356dg_0ddBOkB'  width=300>        
+          
+     * <img src="https://render.githubusercontent.com/render/math?math=w_{3} = w_{2} - m_{3}">
+          
+  * Nesterov Accelerated Gradient
+    * Calculates Gradient slightly ahead in the direction of momentum
+    * Weight updates are not done when it is close to the flat slope and hence prevents **Oscilations**
+  * ADAM (Adaptive Moment Estimation)
+* Optimizers choices that also considers **previous Learning Rates**
+  * AdaGrad
+    * AdaGrad solves **elongated bowl problem**
+    * AdaGrad helps to correct the direction of graident initially
+  * AdaGradDelta
+  * RMSPROP 
 
 ### MlFlow experiments with Optimizers
 <img src='https://drive.google.com/uc?id=1EBeQ3Ec-xPW98yiSqa_-qrvpXJgLIkHO'>
