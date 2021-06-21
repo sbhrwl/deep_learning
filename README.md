@@ -8,11 +8,11 @@
   * [MNIST Dataset](#mnist-dataset) 
   * [Activation functions](#activation-functions)
   * [Weight Initalisation Recommendation](#weight-initalisation-recommendation)
-  * [Cost function](#cost-function)
+  * [Batch Normalisation](#batch-normalisation)
   * [Optimizers](#optimizers)
     * [Backpropogation with chain rule](#backpropogation-with-chain-rule)
     * [Types of optimisers](#types-of-optimisers)
-  * [Batch Normalisation](#batch-normalisation)
+  * [Cost function](#cost-function)
   * [Observation on Early Stopping and Check-pointing](#observation-on-early-stopping-and-check-pointing)
   * [Transfer Learning](#transfer-learning)
 
@@ -223,6 +223,7 @@ To minimise loss we perform **Gradient Descent**. The entity that performs gradi
 
 ### MlFlow experiments with Optimizers
 <img src='https://drive.google.com/uc?id=1EBeQ3Ec-xPW98yiSqa_-qrvpXJgLIkHO'>
+
 * Run 3: batch_size: **100**, epoch 20, Activation function: relu, Optimizer: SGD - Accuracy: 0.959
 * Run 4: batch_size: 100, epoch 20, Activation function: relu, Optimizer: **Adam** - Accuracy: **0.985**
 * Run 5: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, **batch normalisation** - Accuracy: **0.994**
