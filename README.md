@@ -7,9 +7,11 @@
 * [MlFlow Experiments](#mlflow-experiments)
   * [MNIST Dataset](#mnist-dataset) 
   * [Activation functions](#activation-functions)
+  * [Weight Initalisation Recommendation](#weight-initalisation-recommendation)
   * [Cost function](#cost-function)
   * [Optimizers](#optimizers)
-  * [Backpropogation with chain rule](#backpropogation-with-chain-rule)
+    * [Backpropogation with chain rule](#backpropogation-with-chain-rule)
+    * [Types of optimisers](#types-of-optimisers)
   * [Batch Normalisation](#batch-normalisation)
   * [Observation on Early Stopping and Check-pointing](#observation-on-early-stopping-and-check-pointing)
   * [Transfer Learning](#transfer-learning)
@@ -96,7 +98,7 @@ There are different choices for Activation functions
 ### MlFLow experiments with Activation function
 * Run 1: batch_size: 100, epoch 20, Activation function: **sigmoid**, Optimizer: SGD - Accuracy: 0.922
 
-## Activation Functions and Weight Initalisation Recommendation
+## Weight Initalisation Recommendation
 | Initialisation  | Activation function              |
 | --------------- | -------------------------------- |
 | Glorot          | None, Tanh, Sigmoid and Softmax  |
@@ -184,6 +186,7 @@ To minimise loss we perform **Gradient Descent**. The entity that performs gradi
 * Which would eventually mean, moving towards the **ZERO**
 <img src='https://drive.google.com/uc?id=1y-9E1Ps_uVCxjPUn7gdWo793pTku2TdM' width=400>
 
+### Types of optimisers
 * Optimizers choices that works purely based on **previous weights**
   * SGD Momentum
      * SGD with Momentum is based on the basic concept of terminal velocity.
