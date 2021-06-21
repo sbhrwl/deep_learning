@@ -103,7 +103,11 @@ There are different choices for Activation functions
 | He              | Relu and its variants            |
 | LeCum           | Selu                             |
 
-# Batch Normalisation
+### MlFLow experiments with Weight Initalisation
+* Run 1: batch_size: 100, epoch 20, Activation function: **sigmoid**, Optimizer: SGD - Accuracy: 0.922
+* Run 9: **Weight initialization**: Change relu with **he_normal**
+
+## Batch Normalisation
 * To improve the training, we seek to reduce the **Internal Covariate Shift**. 
 * By fixing the **distribution of the hidden layer inputs** as the training progresses, we expect to improve the training speed. 
 * When values are Normalised, GD converges faster and hence results in faster training
@@ -121,7 +125,7 @@ python src/batch_normalisation/bn_mnist.py
 * Run 5: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, **batch normalisation** - Accuracy: **0.994**
 * Run 6: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation with **Bias as false** - Accuracy: 0.993
 
-# Optimizers
+## Optimizers
 To minimise loss we perform **Gradient Descent**. The entity that performs gradient descent is termed as **Optimizer**
 * Optimizers choices that works purely based on **previous weights**
   * SGD Momentum
@@ -157,9 +161,9 @@ To minimise loss we perform **Gradient Descent**. The entity that performs gradi
   * AdaGradDelta
   * RMSPROP 
 
-# Backpropogation with chain rule
-## Question: For ANNs, how do we find the weights and biases so that we get minimum value for Loss/Cost function?
-## Solution: Backpropogation with chain rule
+### Backpropogation with chain rule
+#### Question: For ANNs, how do we find the weights and biases so that we get minimum value for Loss/Cost function?
+#### Solution: Backpropogation with chain rule
 
 Weights and Bias update formula derived with the help of Chain rule
 
@@ -215,7 +219,8 @@ Consider below Neural Network
 * As we have Initialised weights on -ve side, so as per weight update formula we would increase the **NEGATIVE** number
 * Which would eventually mean, moving towards the **ZERO**
 <img src='https://drive.google.com/uc?id=1y-9E1Ps_uVCxjPUn7gdWo793pTku2TdM' width=400>
-## MlFlow experiments with Optimizers
+
+### MlFlow experiments with Optimizers
 <img src='https://drive.google.com/uc?id=1EBeQ3Ec-xPW98yiSqa_-qrvpXJgLIkHO'>
 * Run 3: batch_size: **100**, epoch 20, Activation function: relu, Optimizer: SGD - Accuracy: 0.959
 * Run 4: batch_size: 100, epoch 20, Activation function: relu, Optimizer: **Adam** - Accuracy: **0.985**
@@ -240,7 +245,8 @@ Above observations are with **sparse_categorical_crossentropy**
   * L1:
   * L2:
   * Dropout techniques:
-# Observation on Early Stopping and Check-pointing
+
+## Observation on Early Stopping and Check-pointing
 ```python
 accuracy          loss          restored_epoch          stopped_epoch
 0.9975454807	0.01011859719	          9	               14
@@ -252,7 +258,7 @@ accuracy          loss          restored_epoch          stopped_epoch
 ```
 ### After certain epochs if Accuracy/Loss would not improve, the training will be stopped even before desired number of epochs (2)
 
-# Transfer Learning
+## Transfer Learning
 * Transfer learning enables us to use the already built robust models
 * Steps for Transfer learning
   * Step 1: Load Previous model
@@ -293,7 +299,7 @@ _________________________________________________________________
 python src/transfer_learning/ann_mnist_transfer_learning.py
 ```
 
-## Use Case: Is the Number even?
+### Use Case: Is the Number even?
 * We will train it to get weights for new layer(s) added to the model to suit our use case (example: Is the numer Even?)
 ```python
 python src/transfer_learning/is_even.py
