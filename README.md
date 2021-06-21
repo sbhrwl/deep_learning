@@ -1,4 +1,4 @@
-# DL concepts
+# Deep Learning
 
 * [Perceptron](#perceptron)
 * [Multi Layer Perceptron](#multi-layer-perceptron)
