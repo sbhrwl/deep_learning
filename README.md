@@ -215,9 +215,13 @@ refer [notebook](https://colab.research.google.com/drive/1FEYtjPH5GBY0KVUrX7bFax
 ## Regularisation Techniques
 ### L1 Regularisation
 * LASSO (Least Absolute Shrinkage and Selection Operator) Regularisation
-* L1 normal form
+* It is L1 vector norm of vector **w**
+* |w| is differentiable everywhere except when w=0
+<img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/images/L1-representation.png" width="150"/>
 
-<img src="https://camo.githubusercontent.com/..." data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="200"/>
+* Equation
+  * Alpha is L1 regularisation term
+<img src="https://render.githubusercontent.com/render/math?math=J_{n}(\theta) = J_{0}(\theta) %2B \alpha \sum_{i=1}^{m}|\theta|">
 
 ## MlFlow experiments with Regularisation techniques 
   * L1:
