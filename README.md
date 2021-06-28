@@ -9,10 +9,10 @@
   * [Activation functions](#activation-functions)
   * [Weight Initalisation Recommendation](#weight-initalisation-recommendation)
   * [Batch Normalisation](#batch-normalisation)
+  * [Cost function](#cost-function)
   * [Optimizers](#optimizers)
     * [Backpropogation with chain rule](#backpropogation-with-chain-rule)
     * [Types of optimisers](#types-of-optimisers)
-  * [Cost function](#cost-function)
   * [Observation on Early Stopping and Check-pointing](#observation-on-early-stopping-and-check-pointing)
   * [Transfer Learning](#transfer-learning)
 
@@ -127,6 +127,18 @@ python src/batch_normalisation/bn_mnist.py
 * Run 5: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, **batch normalisation** - Accuracy: **0.994**
 * Run 6: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation with **Bias as false** - Accuracy: 0.993
 
+## Cost function
+* We now have the output from ANN (**y hat**) and we also know the Actual Output (**y**).
+* Using y hat and y, we calculate error/loss made by the model/network using **Cost functions**
+* Options for Cost functions depends on problem to solve
+  * Regression
+    * MAE (L1) /MSE (L2) / RMSE
+  * Classification
+    * CrossEntropy or Log Loss /Hinge Loss
+ 
+## MlFlow experiments with Loss Functions 
+Above observations are with **sparse_categorical_crossentropy**
+
 ## Optimizers
 To minimise loss we perform **Gradient Descent**. The entity that performs gradient descent is termed as **Optimizer**
 ### Backpropogation with chain rule
@@ -187,39 +199,7 @@ To minimise loss we perform **Gradient Descent**. The entity that performs gradi
 <img src='https://drive.google.com/uc?id=1y-9E1Ps_uVCxjPUn7gdWo793pTku2TdM' width=400>
 
 ### Types of optimisers
-* Optimizers choices that works purely based on **previous weights**
-  * SGD Momentum
-     * SGD with Momentum is based on the basic concept of terminal velocity.
-     * This alogrithm introduces a new term **momentum (m)** in the weight update formaula
-     
-          <img src="https://render.githubusercontent.com/render/math?math=w = w - m">
-          
-          where m is given by below equation
-          
-          <img src="https://render.githubusercontent.com/render/math?math=m = \beta m - \eta\frac{\partial y}{\partial x}">
-          
-          **Beta** coefficient of momentum (Usualyy the value of Beta is 0.9
-          
-          Example weight update for W3 can be written as 
-          
-          Latex not inserting **+** sign properly
-          
-          <img src="https://render.githubusercontent.com/render/math?math=m_{3} = \eta \left [ \beta ^{2} \frac{\partial y}{\partial x} |_{w =w_{0}} + \beta \frac{\partial y}{\partial x} |_{w =w_{1}} + \frac{\partial y}{\partial x} |_{w =w_{0}}\right ]">
-          
-     * <img src='https://drive.google.com/uc?id=1yamlvVvYPi2QwOrRnX6356dg_0ddBOkB'  width=300>        
-          
-     * <img src="https://render.githubusercontent.com/render/math?math=w_{3} = w_{2} - m_{3}">
-          
-  * Nesterov Accelerated Gradient
-    * Calculates Gradient slightly ahead in the direction of momentum
-    * Weight updates are not done when it is close to the flat slope and hence prevents **Oscilations**
-  * ADAM (Adaptive Moment Estimation)
-* Optimizers choices that also considers **previous Learning Rates**
-  * AdaGrad
-    * AdaGrad solves **elongated bowl problem**
-    * AdaGrad helps to correct the direction of graident initially
-  * AdaGradDelta
-  * RMSPROP 
+refer [notebook](https://colab.research.google.com/drive/1FEYtjPH5GBY0KVUrX7bFaxRy736WLQvz?usp=sharing)
 
 ### MlFlow experiments with Optimizers
 <img src='https://drive.google.com/uc?id=1EBeQ3Ec-xPW98yiSqa_-qrvpXJgLIkHO'>
@@ -230,18 +210,6 @@ To minimise loss we perform **Gradient Descent**. The entity that performs gradi
 * Run 6: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation with **Bias as false** - Accuracy: 0.993
 * Run 7: batch_size: 100, epoch 20, Activation function: **sigmoid**, Optimizer: SGD - Accuracy: 0.922
 * Run 8: batch_size: 100, epoch 20, Activation function: sigmoid, Optimizer: **Adam** - Accuracy: **0.997**
-
-## Cost function
-* We now have the output from ANN (**y hat**) and we also know the Actual Output (**y**).
-* Using y hat and y, we calculate error/loss made by the model/network using **Cost functions**
-* Options for Cost functions depends on problem to solve
-  * Regression
-    * MAE (L1) /MSE (L2) / RMSE
-  * Classification
-    * CrossEntropy or Log Loss /Hinge Loss
- 
-## MlFlow experiments with Loss Functions 
-Above observations are with **sparse_categorical_crossentropy**
 
 ## MlFlow experiments with Regularisation techniques 
   * L1:
@@ -307,6 +275,7 @@ python src/transfer_learning/ann_mnist_transfer_learning.py
 python src/transfer_learning/is_even.py
 ```
 
-* Latex: https://latex.codecogs.com/eqneditor/editor.php
-* Netron: https://netron.app/
-* Sketch: https://app.sketchup.com/app?hl=en#
+* [Latex](https://latex.codecogs.com/eqneditor/editor.php)
+* [Netron](https://netron.app/)
+* [Sketch](https://app.sketchup.com/app?hl=en#)
+* [3D plots](https://c3d.libretexts.org/CalcPlot3D/index.html)
