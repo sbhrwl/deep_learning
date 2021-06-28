@@ -13,6 +13,7 @@
   * [Optimizers](#optimizers)
     * [Backpropogation with chain rule](#backpropogation-with-chain-rule)
     * [Types of optimisers](#types-of-optimisers)
+  * [Regularisation Techniques](#regularisation-techniques)
   * [Observation on Early Stopping and Check-pointing](#observation-on-early-stopping-and-check-pointing)
   * [Transfer Learning](#transfer-learning)
 
@@ -210,6 +211,13 @@ refer [notebook](https://colab.research.google.com/drive/1FEYtjPH5GBY0KVUrX7bFax
 * Run 6: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation with **Bias as false** - Accuracy: 0.993
 * Run 7: batch_size: 100, epoch 20, Activation function: **sigmoid**, Optimizer: SGD - Accuracy: 0.922
 * Run 8: batch_size: 100, epoch 20, Activation function: sigmoid, Optimizer: **Adam** - Accuracy: **0.997**
+
+## Regularisation Techniques
+### L1 Regularisation
+* LASSO (Least Absolute Shrinkage and Selection Operator) Regularisation
+* L1 normal form
+
+<img src="https://camo.githubusercontent.com/..." data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="200"/>
 
 ## MlFlow experiments with Regularisation techniques 
   * L1:
