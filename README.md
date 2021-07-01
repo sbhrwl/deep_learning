@@ -235,9 +235,9 @@ refer [notebook](https://colab.research.google.com/drive/1FEYtjPH5GBY0KVUrX7bFax
 <img src="https://render.githubusercontent.com/render/math?math=J_{n}(\theta) = J_{0}(\theta) %2B \alpha \sum_{i=1}^{m}|\theta|">
 
 ## MlFlow experiments with Regularisation techniques 
-  * Run 17: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L1 Regularisation**:  - Accuracy: 0.991
-  * Run 18: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L2 Regularisation**:  - Accuracy: 0.991
-  * Run 19: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L1 + L2 Regularisation**:  - Accuracy: 0.991
+  * Run 17: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L1 Regularisation** (regularizers.l1(l1=0.0001)):  - Accuracy: 0.984
+  * Run 18: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L2 Regularisation** (regularizers.l2(l1=0.0001)):  - Accuracy: 0.982
+  * Run 19: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L1 + L2 Regularisation** (regularizers.l1_l2(l1=0.0001, l2=0.0001)):  - Accuracy: 0.981
   * Run 20: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **Dropout Regularisation**:  - Accuracy: 0.991
 
 ## Observation on Early Stopping and Check-pointing
