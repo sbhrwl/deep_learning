@@ -20,7 +20,7 @@ mlflow_config:
 
 model_learning_setup:
   model_type: "batch_normalisation" # basic, batch_normalisation, batch_normalisation_without_bias
-  optimizer: "adagrad" # "sgd", "adagrad", "adadelta", "rmsprop", "adam", "adamax"
+  optimizer: "rmsprop" # "sgd", "adagrad", "adadelta", "rmsprop", "adam", "adamax"
   learning_rate: 0.001
   momentum: 0.9 # 0.0
   nesterov: True # False True
