@@ -54,7 +54,9 @@ Tuning a particular model can be splitted as below
 
 # MlFlow Experiments
 MlFLow helps by tracking different experiments that we can do with the various training parameters and model metrics.
-
+```
+mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./artifacts/mlflow-artifacts --host 0.0.0.0 -p 1234
+```
 ## MNIST Dataset
 * Each image is a 28*28 matrix (number 0-9)
 * To feed them in Neural network we have to make them in a single row or array, so we perform **Flatten** operation
