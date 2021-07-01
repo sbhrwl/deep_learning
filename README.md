@@ -148,7 +148,7 @@ To minimise loss we perform **Gradient Descent**. The entity that performs gradi
 * Weights and Bias update formula derived with the help of Chain rule
 * Consider below Neural Network
 
-<img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/images/GD.png" width="1000"/>
+<img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/images/GD.jpg" width="1000"/>
 
   * x1: Input to the NN
   * a0: Activation at Buffer layer (No activation)
