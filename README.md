@@ -145,6 +145,7 @@ There are different choices for Activation functions
  
 ## MlFlow experiments with Loss Functions 
 <img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/images/MlFlow-11experiments.png" width="1000"/>
+
 Above 11 experiments are with **sparse_categorical_crossentropy**
 
 ## Optimizers
