@@ -125,8 +125,8 @@ There are different choices for Activation functions
 * By fixing the **distribution of the hidden layer inputs** as the training progresses, we expect to improve the training speed. 
 * When values are Normalised, GD converges faster and hence results in faster training
 * Batch Normalisation introduces 4 parameters out of which only 2 are learnable parameters *(2 Extra trainable parameters)
-* When uisng Batch Normalisation **before Activation**, then there is **no need to use bias** as becasue BN layer itself contains Beta term which is equivalent to Bias.
-* When uisng Batch Normalisation **after Activation**, then you need to use bias as activation function generally prefer input containing weights and biases.
+* When using Batch Normalisation **before Activation**, then there is **no need to use bias** as becasue BN layer itself contains Beta term which is equivalent to Bias.
+* When using Batch Normalisation **after Activation**, then you need to use bias as activation function generally prefer input containing weights and biases.
 * Batch Normalisation is useful when we have deep neural networks (CNN)
 * Recommendation: When our network has more than **16** layers use Batch Normalisation
 
@@ -144,7 +144,8 @@ There are different choices for Activation functions
     * CrossEntropy or Log Loss /Hinge Loss
  
 ## MlFlow experiments with Loss Functions 
-Above observations are with **sparse_categorical_crossentropy**
+<img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/images/MlFlow-11experiments.png" width="1000"/>
+Above 11 experiments are with **sparse_categorical_crossentropy**
 
 ## Optimizers
 To minimise loss we perform **Gradient Descent**. The entity that performs gradient descent is termed as **Optimizer**
