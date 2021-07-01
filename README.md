@@ -148,7 +148,7 @@ To minimise loss we perform **Gradient Descent**. The entity that performs gradi
 * Weights and Bias update formula derived with the help of Chain rule
 * Consider below Neural Network
 
-<img src='https://drive.google.com/uc?id=1EBK3v15DL_Mk6mNswaW8094pSHGfr3fX'  width=1000>
+<img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/images/GD.png" width="1000"/>
 
   * x1: Input to the NN
   * a0: Activation at Buffer layer (No activation)
@@ -197,7 +197,8 @@ To minimise loss we perform **Gradient Descent**. The entity that performs gradi
 * Product of Learning rate and Gradient will be **NEGATIVE** (slope/tangent/Tan Theta > 90 degrees is a **negative** number)
 * As we have Initialised weights on -ve side, so as per weight update formula we would increase the **NEGATIVE** number
 * Which would eventually mean, moving towards the **ZERO**
-<img src='https://drive.google.com/uc?id=1y-9E1Ps_uVCxjPUn7gdWo793pTku2TdM' width=400>
+
+<img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/images/WeightInitilaisedOnNegativeSide.png" width="400"/>
 
 ### Types of optimisers
 refer [notebook](https://colab.research.google.com/drive/1FEYtjPH5GBY0KVUrX7bFaxRy736WLQvz?usp=sharing)
