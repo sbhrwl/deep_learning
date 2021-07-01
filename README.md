@@ -54,7 +54,9 @@ Tuning a particular model can be splitted as below
 
 # MlFlow Experiments
 MlFLow helps by tracking different experiments that we can do with the various training parameters and model metrics.
-
+```
+mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./artifacts/mlflow-artifacts --host 0.0.0.0 -p 1234
+```
 ## MNIST Dataset
 * Each image is a 28*28 matrix (number 0-9)
 * To feed them in Neural network we have to make them in a single row or array, so we perform **Flatten** operation
@@ -65,13 +67,18 @@ MlFLow helps by tracking different experiments that we can do with the various t
 ```python
 python src/ann_mnist_basic_model/ann_mnist_basic_model.py
 ```
+Before performing experiments with mlflow, update **parameters.yaml** based on your experiment requirements (section **model_learning_setup** and **model_training_parameters**)
 ```python
 python src/mlflow_ann_mnist/mlflow_ann_mnist.py
 ```
+### After each experiment, to check how training (training and validation loss) progressed, refer Learning Curve 
+```
+/artifacts/ann-mnist-model/learning_curve_plot.png
+```
 ### MlFLow experiments with Epoch and Batch size
-* Run 1: batch_size: 50, epoch 1, Activation function: relu, Optimizer: SGD - Accuracy: 0.809
-* Run 2: batch_size: 50, epoch **20**, Activation function: relu, Optimizer: SGD - Accuracy: **0.977**
-* Run 3: batch_size: **100**, epoch 20, Activation function: relu, Optimizer: SGD - Accuracy: 0.959
+* Run 1: batch_size: 50, epoch 1, Activation function: relu, Optimizer: SGD - Accuracy: 0.812
+* Run 2: batch_size: 50, epoch **20**, Activation function: relu, Optimizer: SGD - Accuracy: **0.978**
+* Run 3: batch_size: **100**, epoch 20, Activation function: relu, Optimizer: SGD - Accuracy: 0.961
 
 ## Activation functions
 There are different choices for Activation functions
@@ -97,7 +104,11 @@ There are different choices for Activation functions
 * Gradient staturation means **gradient tends to zero** which results into zero or neglegible weight updates. 
 
 ### MlFLow experiments with Activation function
-* Run 1: batch_size: 100, epoch 20, Activation function: **sigmoid**, Optimizer: SGD - Accuracy: 0.922
+* Run 4: batch_size: 50, epoch 20, Activation function: **sigmoid**, Weight Initilizer: **glorot_normal** Optimizer: SGD - Accuracy: 0.900
+* Run 5: batch_size: 50, epoch 20, Activation function: **tanh**, Weight Initilizer: **glorot_normal** Optimizer: SGD - Accuracy: 0.962
+* Run 6: batch_size: 50, epoch 20, Activation function: **selu**, Weight Initilizer: **he_normal** Optimizer: SGD - Accuracy: 0.972
+* Run 7: batch_size: 50, epoch 20, Activation function: **elu**, Weight Initilizer: **he_normal** Optimizer: SGD - Accuracy: 0.968
+* Run 8: batch_size: 50, epoch 20, Activation function: **relu**, Weight Initilizer: **he_normal** Optimizer: SGD - Accuracy: 0.977
 
 ## Weight Initalisation Recommendation
 | Initialisation  | Activation function              |
@@ -107,26 +118,21 @@ There are different choices for Activation functions
 | LeCum           | Selu                             |
 
 ### MlFLow experiments with Weight Initalisation
-* Run 1: batch_size: 100, epoch 20, Activation function: **sigmoid**, Optimizer: SGD - Accuracy: 0.922
-* Run 9: **Weight initialization**: Change relu with **he_normal**
+* Run 9: batch_size: 50, epoch 20, Activation function: **relu**, Weight Initilizer: **glorot_normal** Optimizer: SGD - Accuracy: 0.977
 
 ## Batch Normalisation
 * To improve the training, we seek to reduce the **Internal Covariate Shift**. 
 * By fixing the **distribution of the hidden layer inputs** as the training progresses, we expect to improve the training speed. 
 * When values are Normalised, GD converges faster and hence results in faster training
 * Batch Normalisation introduces 4 parameters out of which only 2 are learnable parameters *(2 Extra trainable parameters)
-* When uisng Batch Normalisation **before Activation**, then there is **no need to use bias** as becasue BN layer itself contains Beta term which is equivalent to Bias.
-* When uisng Batch Normalisation **after Activation**, then you need to use bias as activation function generally prefer input containing weights and biases.
+* When using Batch Normalisation **before Activation**, then there is **no need to use bias** as becasue BN layer itself contains Beta term which is equivalent to Bias.
+* When using Batch Normalisation **after Activation**, then you need to use bias as activation function generally prefer input containing weights and biases.
 * Batch Normalisation is useful when we have deep neural networks (CNN)
 * Recommendation: When our network has more than **16** layers use Batch Normalisation
 
-### ANN Model with Batch normalisation on MNIST dataset
-```python
-python src/batch_normalisation/bn_mnist.py
-```
 ### MlFLow experiments with Batch Normalisation
-* Run 5: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, **batch normalisation** - Accuracy: **0.994**
-* Run 6: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation with **Bias as false** - Accuracy: 0.993
+* Run 10: batch_size: 50, epoch 20, Activation function: relu, Optimizer: SGD, **batch normalisation** - Accuracy: **0.993**
+* Run 11: batch_size: 50, epoch 20, Activation function: relu, Optimizer: SGD, batch normalisation with **Bias as false** - Accuracy: 0.991
 
 ## Cost function
 * We now have the output from ANN (**y hat**) and we also know the Actual Output (**y**).
@@ -138,7 +144,8 @@ python src/batch_normalisation/bn_mnist.py
     * CrossEntropy or Log Loss /Hinge Loss
  
 ## MlFlow experiments with Loss Functions 
-Above observations are with **sparse_categorical_crossentropy**
+<img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/images/MlFlow-11experiments.png" width="1000"/>
+Above 11 experiments are with **sparse_categorical_crossentropy**
 
 ## Optimizers
 To minimise loss we perform **Gradient Descent**. The entity that performs gradient descent is termed as **Optimizer**
@@ -148,7 +155,7 @@ To minimise loss we perform **Gradient Descent**. The entity that performs gradi
 * Weights and Bias update formula derived with the help of Chain rule
 * Consider below Neural Network
 
-<img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/images/GD.png" width="1000"/>
+<img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/images/GD.jpg" width="1000"/>
 
   * x1: Input to the NN
   * a0: Activation at Buffer layer (No activation)
@@ -206,12 +213,11 @@ refer [notebook](https://colab.research.google.com/drive/1FEYtjPH5GBY0KVUrX7bFax
 ### MlFlow experiments with Optimizers
 <img src='https://drive.google.com/uc?id=1EBeQ3Ec-xPW98yiSqa_-qrvpXJgLIkHO'>
 
-* Run 3: batch_size: **100**, epoch 20, Activation function: relu, Optimizer: SGD - Accuracy: 0.959
-* Run 4: batch_size: 100, epoch 20, Activation function: relu, Optimizer: **Adam** - Accuracy: **0.985**
-* Run 5: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, **batch normalisation** - Accuracy: **0.994**
-* Run 6: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation with **Bias as false** - Accuracy: 0.993
-* Run 7: batch_size: 100, epoch 20, Activation function: **sigmoid**, Optimizer: SGD - Accuracy: 0.922
-* Run 8: batch_size: 100, epoch 20, Activation function: sigmoid, Optimizer: **Adam** - Accuracy: **0.997**
+* Run 12: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **SGD (with Momentum as 0.9)**, batch normalisation - Accuracy: 0.991
+* Run 13: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **Nesterov**, batch normalisation - Accuracy: 0.991
+* Run 14: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **ADA grad**, batch normalisation - Accuracy: 0.991
+* Run 15: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **RMS Prop**, batch normalisation - Accuracy: 0.991
+* Run 16: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **Adam**, batch normalisation - Accuracy: 0.991
 
 ## Regularisation Techniques
 ### L1 Regularisation
@@ -225,9 +231,10 @@ refer [notebook](https://colab.research.google.com/drive/1FEYtjPH5GBY0KVUrX7bFax
 <img src="https://render.githubusercontent.com/render/math?math=J_{n}(\theta) = J_{0}(\theta) %2B \alpha \sum_{i=1}^{m}|\theta|">
 
 ## MlFlow experiments with Regularisation techniques 
-  * L1:
-  * L2:
-  * Dropout techniques:
+  * Run 17: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L1 Regularisation**:  - Accuracy: 0.991
+  * Run 18: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L2 Regularisation**:  - Accuracy: 0.991
+  * Run 19: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L1 + L2 Regularisation**:  - Accuracy: 0.991
+  * Run 20: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **Dropout Regularisation**:  - Accuracy: 0.991
 
 ## Observation on Early Stopping and Check-pointing
 ```python
