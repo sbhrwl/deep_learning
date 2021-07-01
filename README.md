@@ -67,13 +67,18 @@ mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./
 ```python
 python src/ann_mnist_basic_model/ann_mnist_basic_model.py
 ```
+Before performing experiments with mlflow, update **parameters.yaml** based on your experiment requirements (section **model_learning_setup** and **model_training_parameters**)
 ```python
 python src/mlflow_ann_mnist/mlflow_ann_mnist.py
 ```
+### After each experiment, to check how training (training and validation loss) progressed, refer Learning Curve 
+```
+/artifacts/ann-mnist-model/learning_curve_plot.png
+```
 ### MlFLow experiments with Epoch and Batch size
-* Run 1: batch_size: 50, epoch 1, Activation function: relu, Optimizer: SGD - Accuracy: 0.809
-* Run 2: batch_size: 50, epoch **20**, Activation function: relu, Optimizer: SGD - Accuracy: **0.977**
-* Run 3: batch_size: **100**, epoch 20, Activation function: relu, Optimizer: SGD - Accuracy: 0.959
+* Run 1: batch_size: 50, epoch 1, Activation function: relu, Optimizer: SGD - Accuracy: 0.812
+* Run 2: batch_size: 50, epoch **20**, Activation function: relu, Optimizer: SGD - Accuracy: **0.978**
+* Run 3: batch_size: **100**, epoch 20, Activation function: relu, Optimizer: SGD - Accuracy: 0.961
 
 ## Activation functions
 There are different choices for Activation functions
@@ -99,7 +104,11 @@ There are different choices for Activation functions
 * Gradient staturation means **gradient tends to zero** which results into zero or neglegible weight updates. 
 
 ### MlFLow experiments with Activation function
-* Run 1: batch_size: 100, epoch 20, Activation function: **sigmoid**, Optimizer: SGD - Accuracy: 0.922
+* Run 4: batch_size: 50, epoch 20, Activation function: **sigmoid**, Weight Initilizer: **glorot_normal** Optimizer: SGD - Accuracy: 0.900
+* Run 5: batch_size: 50, epoch 20, Activation function: **tanh**, Weight Initilizer: **glorot_normal** Optimizer: SGD - Accuracy: 0.962
+* Run 6: batch_size: 50, epoch 20, Activation function: **selu**, Weight Initilizer: **he_normal** Optimizer: SGD - Accuracy: 0.972
+* Run 7: batch_size: 50, epoch 20, Activation function: **elu**, Weight Initilizer: **he_normal** Optimizer: SGD - Accuracy: 0.968
+* Run 8: batch_size: 50, epoch 20, Activation function: **relu**, Weight Initilizer: **he_normal** Optimizer: SGD - Accuracy: 0.977
 
 ## Weight Initalisation Recommendation
 | Initialisation  | Activation function              |
@@ -109,8 +118,7 @@ There are different choices for Activation functions
 | LeCum           | Selu                             |
 
 ### MlFLow experiments with Weight Initalisation
-* Run 1: batch_size: 100, epoch 20, Activation function: **sigmoid**, Optimizer: SGD - Accuracy: 0.922
-* Run 9: **Weight initialization**: Change relu with **he_normal**
+* Run 9: batch_size: 50, epoch 20, Activation function: **relu**, Weight Initilizer: **glorot_normal** Optimizer: SGD - Accuracy: 0.977
 
 ## Batch Normalisation
 * To improve the training, we seek to reduce the **Internal Covariate Shift**. 
@@ -122,13 +130,9 @@ There are different choices for Activation functions
 * Batch Normalisation is useful when we have deep neural networks (CNN)
 * Recommendation: When our network has more than **16** layers use Batch Normalisation
 
-### ANN Model with Batch normalisation on MNIST dataset
-```python
-python src/batch_normalisation/bn_mnist.py
-```
 ### MlFLow experiments with Batch Normalisation
-* Run 5: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, **batch normalisation** - Accuracy: **0.994**
-* Run 6: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation with **Bias as false** - Accuracy: 0.993
+* Run 10: batch_size: 50, epoch 20, Activation function: relu, Optimizer: SGD, **batch normalisation** - Accuracy: **0.993**
+* Run 11: batch_size: 50, epoch 20, Activation function: relu, Optimizer: SGD, batch normalisation with **Bias as false** - Accuracy: 0.991
 
 ## Cost function
 * We now have the output from ANN (**y hat**) and we also know the Actual Output (**y**).
@@ -208,12 +212,11 @@ refer [notebook](https://colab.research.google.com/drive/1FEYtjPH5GBY0KVUrX7bFax
 ### MlFlow experiments with Optimizers
 <img src='https://drive.google.com/uc?id=1EBeQ3Ec-xPW98yiSqa_-qrvpXJgLIkHO'>
 
-* Run 3: batch_size: **100**, epoch 20, Activation function: relu, Optimizer: SGD - Accuracy: 0.959
-* Run 4: batch_size: 100, epoch 20, Activation function: relu, Optimizer: **Adam** - Accuracy: **0.985**
-* Run 5: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, **batch normalisation** - Accuracy: **0.994**
-* Run 6: batch_size: 100, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation with **Bias as false** - Accuracy: 0.993
-* Run 7: batch_size: 100, epoch 20, Activation function: **sigmoid**, Optimizer: SGD - Accuracy: 0.922
-* Run 8: batch_size: 100, epoch 20, Activation function: sigmoid, Optimizer: **Adam** - Accuracy: **0.997**
+* Run 12: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **SGD (with Momentum as 0.9)**, batch normalisation - Accuracy: 0.991
+* Run 13: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **Nesterov**, batch normalisation - Accuracy: 0.991
+* Run 14: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **ADA grad**, batch normalisation - Accuracy: 0.991
+* Run 15: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **RMS Prop**, batch normalisation - Accuracy: 0.991
+* Run 16: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **Adam**, batch normalisation - Accuracy: 0.991
 
 ## Regularisation Techniques
 ### L1 Regularisation
@@ -227,9 +230,10 @@ refer [notebook](https://colab.research.google.com/drive/1FEYtjPH5GBY0KVUrX7bFax
 <img src="https://render.githubusercontent.com/render/math?math=J_{n}(\theta) = J_{0}(\theta) %2B \alpha \sum_{i=1}^{m}|\theta|">
 
 ## MlFlow experiments with Regularisation techniques 
-  * L1:
-  * L2:
-  * Dropout techniques:
+  * Run 17: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L1 Regularisation**:  - Accuracy: 0.991
+  * Run 18: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L2 Regularisation**:  - Accuracy: 0.991
+  * Run 19: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L1 + L2 Regularisation**:  - Accuracy: 0.991
+  * Run 20: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **Dropout Regularisation**:  - Accuracy: 0.991
 
 ## Observation on Early Stopping and Check-pointing
 ```python
