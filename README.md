@@ -212,13 +212,16 @@ To minimise loss we perform **Gradient Descent**. The entity that performs gradi
 refer [notebook](https://colab.research.google.com/drive/1FEYtjPH5GBY0KVUrX7bFaxRy736WLQvz?usp=sharing)
 
 ### MlFlow experiments with Optimizers
-<img src='https://drive.google.com/uc?id=1EBeQ3Ec-xPW98yiSqa_-qrvpXJgLIkHO'>
-
-* Run 12: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **SGD (with Momentum as 0.9)**, batch normalisation - Accuracy: 0.991
-* Run 13: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **Nesterov**, batch normalisation - Accuracy: 0.991
+* Run 12: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **SGD (with Momentum as 0.9)**, batch normalisation - Accuracy: 0.991 (same as Run 11)
+* Run 13: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **Nesterov**, batch normalisation - Accuracy: 0.991 (same as Run 11)
 * Run 14: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **ADA grad**, batch normalisation - Accuracy: 0.991
-* Run 15: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **RMS Prop**, batch normalisation - Accuracy: 0.991
-* Run 16: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **Adam**, batch normalisation - Accuracy: 0.991
+* Run 15: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **ADA delta**, batch normalisation - Accuracy: 0.990
+* Run 16: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **RMS Prop**, batch normalisation - Accuracy: 0.991
+* Run 17: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **Adam**, batch normalisation - Accuracy: 0.986
+* Run 18: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **Adamax**, batch normalisation - Accuracy: 0.986
+
+### Learning curve Optimizer wise
+<img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/ann-mnist-model/LearningCurve-OptimizersWise.png" width="1000"/>
 
 ## Regularisation Techniques
 ### L1 Regularisation
