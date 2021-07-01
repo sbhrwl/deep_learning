@@ -14,37 +14,37 @@ ann_mnist_config:
 mlflow_config:
   artifacts_dir: artifacts/mlflow-artifacts
   remote_server_uri: http://localhost:1234
-  experiment_name: MNIST model
+  experiment_name: MNIST Digit model
   tensorflow_auto_log_every_n_iter: 2
   # 2: mlflow will log the training metrics (loss, accuracy, and validation loss etc.) every 2 epochs
 
 model_learning_setup:
-  model_type: "basic" # basic, batch_normalisation, batch_normalisation_without_bias
-  optimizer: "sgd" # "sgd" "adam"
+  model_type: "batch_normalisation" # basic, batch_normalisation, batch_normalisation_without_bias
+  optimizer: "adagrad" # "sgd", "adagrad", "adadelta", "rmsprop", "adam", "adamax"
   learning_rate: 0.001
   momentum: 0.9 # 0.0
   nesterov: True # False True
   beta_1: 0.9
   beta_2: 0.999
   epsilon: 0.000001 # 1e-08
-  # categorical_crossentropy, sparse_categorical_crossentropy, binary_crossentropy
+  # binary_crossentropy, categorical_crossentropy, sparse_categorical_crossentropy
   loss_function: "sparse_categorical_crossentropy"
   metrics: [ "accuracy" ]
 
 model_training_parameters:
-  epochs: 1
-  batch: 100
+  epochs: 20
+  batch: 50
   configure_layers:
     hidden_layer_1_name: hidden_layer_1
-    hidden_layer_1_activation: relu # sigmoid, relu
+    hidden_layer_1_activation: relu # sigmoid, tanh, relu, selu, elu, PReLU, LeakyReLU
     hidden_layer_1_number_of_neurons: 300
      # for sigmoid and tanh "glorot_uniform" "glorot_normal", xavier ~glorot
      # for ReLU "he_uniform" "he_normal"
-    hidden_layer_1_kernel_initializer: he_normal
+    hidden_layer_1_kernel_initializer: glorot_normal
     hidden_layer_2_name: hidden_layer_2
     hidden_layer_2_activation: relu
     hidden_layer_2_number_of_neurons: 100
-    hidden_layer_2_kernel_initializer: he_normal
+    hidden_layer_2_kernel_initializer: glorot_normal
     output_layer_name: output_layer
     output_layer_activation: softmax
     output_layer_number_of_neurons: 10

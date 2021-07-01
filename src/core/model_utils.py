@@ -189,7 +189,7 @@ def get_bn_model():
     print(tf_model.layers)
     print(tf_model.summary())
 
-    loss_function, optimizer, metrics = get_learning_parameters(tf_model)
+    loss_function, optimizer, metrics = get_learning_parameters()
 
     tf_model.compile(loss=loss_function,
                      optimizer=optimizer,
@@ -232,7 +232,7 @@ def get_bn_before_activation_function_model():
     print(tf_model.layers)
     print(tf_model.summary())
 
-    loss_function, optimizer, metrics = get_learning_parameters(tf_model)
+    loss_function, optimizer, metrics = get_learning_parameters()
 
     tf_model.compile(loss=loss_function,
                      optimizer=optimizer,
