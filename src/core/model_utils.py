@@ -1,6 +1,7 @@
 import time
 import os
 import tensorflow as tf
+from tensorflow.keras import regularizers
 # from keras.optimizers import SGD, Adam
 import matplotlib.pyplot as plt
 from src.core.common_utils import get_parameters
@@ -21,7 +22,30 @@ def get_learning_parameters():
                                             nesterov=sgd_nesterov,
                                             name='SGD'
                                             )
-    else:
+    elif model_learning_setup["optimizer"] == "adagrad":
+        initial_accumulator_value = model_learning_setup["initial_accumulator_value"]
+        ada_grad_epsilon = model_learning_setup["epsilon"]
+
+        optimizer = tf.keras.optimizers.Adagrad(learning_rate=model_learning_rate,
+                                                initial_accumulator_value=initial_accumulator_value,
+                                                epsilon=ada_grad_epsilon)
+    elif model_learning_setup["optimizer"] == "adadelta":
+        rho = model_learning_setup["rho"]
+        ada_delta_epsilon = model_learning_setup["epsilon"]
+
+        optimizer = tf.keras.optimizers.Adadelta(learning_rate=model_learning_rate,
+                                                 rho=rho,
+                                                 epsilon=ada_delta_epsilon)
+    elif model_learning_setup["optimizer"] == "rmsprop":
+        momentum = model_learning_setup["momentum"]
+        rho = model_learning_setup["rho"]
+        rms_prop_epsilon = model_learning_setup["epsilon"]
+
+        optimizer = tf.keras.optimizers.RMSprop(learning_rate=model_learning_rate,
+                                                rho=rho,
+                                                momentum=momentum,
+                                                epsilon=rms_prop_epsilon)
+    else:  # Consider other cases as adam
         adam_beta_1 = model_learning_setup["beta_1"]
         adam_beta_2 = model_learning_setup["beta_2"]
         adam_epsilon = model_learning_setup["epsilon"]
@@ -56,11 +80,19 @@ def get_basic_model():
               tf.keras.layers.Dense(hidden_layer_1_number_of_neurons,
                                     activation=hidden_layer_1_activation,
                                     kernel_initializer=hidden_layer_1_kernel_initializer,
+                                    # kernel_regularizer=regularizers.l1(l1=0.0001),
+                                    # kernel_regularizer=regularizers.l2(l2=0.0001),
+                                    # kernel_regularizer=regularizers.l1_l2(l1=0.0001, l2=0.0001),
                                     name=hidden_layer_1_name),
+              tf.keras.layers.Dropout(0.3),
               tf.keras.layers.Dense(hidden_layer_2_number_of_neurons,
                                     activation=hidden_layer_2_activation,
                                     kernel_initializer=hidden_layer_2_kernel_initializer,
+                                    # kernel_regularizer=regularizers.l1(l1=0.0001),
+                                    # kernel_regularizer=regularizers.l2(l2=0.0001),
+                                    # kernel_regularizer=regularizers.l1_l2(l1=0.0001, l2=0.0001),
                                     name=hidden_layer_2_name),
+              tf.keras.layers.Dropout(0.3),
               tf.keras.layers.Dense(output_layer_number_of_neurons,
                                     activation=output_layer_activation,
                                     name=output_layer_name)]

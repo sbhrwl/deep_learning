@@ -19,14 +19,36 @@ mlflow_config:
   # 2: mlflow will log the training metrics (loss, accuracy, and validation loss etc.) every 2 epochs
 
 model_learning_setup:
-  model_type: "batch_normalisation" # basic, batch_normalisation, batch_normalisation_without_bias
-  optimizer: "rmsprop" # "sgd", "adagrad", "adadelta", "rmsprop", "adam", "adamax"
+  model_type: "basic" # basic, batch_normalisation, batch_normalisation_without_bias
+  optimizer: "adam" # "sgd", "adagrad", "adadelta", "rmsprop", "adam", "adamax"
   learning_rate: 0.001
+
+  #1. SGD parameters
   momentum: 0.9 # 0.0
+
+  #2. When Nesterov is true
+  #  velocity = momentum * velocity - learning_rate * g
+  #  w = w + momentum * velocity - learning_rate * g
   nesterov: True # False True
+
+  #3. Ada grad parameters
+  initial_accumulator_value: 0.1
+  #  epsilon: 0.000001
+
+  #4. Ada delta parameters
+  rho: 0.95
+  #  epsilon: 0.000001
+
+  #5. RMS prop parameters
+  #  momentum: 0.9 # 0.0
+  #  rho: 0.95
+  #  epsilon: 0.000001
+
+  #6. Adam parameters
   beta_1: 0.9
   beta_2: 0.999
   epsilon: 0.000001 # 1e-08
+
   # binary_crossentropy, categorical_crossentropy, sparse_categorical_crossentropy
   loss_function: "sparse_categorical_crossentropy"
   metrics: [ "accuracy" ]
