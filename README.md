@@ -208,17 +208,13 @@ To minimise loss we perform **Gradient Descent**. The entity that performs gradi
 
 <img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/images/WeightInitilaisedOnNegativeSide.png" width="400"/>
 
-### Types of optimisers
-refer [notebook](https://colab.research.google.com/drive/1FEYtjPH5GBY0KVUrX7bFaxRy736WLQvz?usp=sharing)
-
-### MlFlow experiments with Optimizers
+### MlFlow experiments with different types of Optimizers
 * Run 12: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **SGD (with Momentum as 0.9)**, batch normalisation - Accuracy: 0.991 (same as Run 11)
 * Run 13: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **Nesterov**, batch normalisation - Accuracy: 0.991 (same as Run 11)
-* Run 14: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **ADA grad**, batch normalisation - Accuracy: 0.991
-* Run 15: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **ADA delta**, batch normalisation - Accuracy: 0.990
-* Run 16: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **RMS Prop**, batch normalisation - Accuracy: 0.991
+* Run 14: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **ADA grad**, batch normalisation - Accuracy: 0.932
+* Run 15: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **ADA delta**, batch normalisation - Accuracy: 0.895
+* Run 16: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **RMS Prop**, batch normalisation - Accuracy: 0.942
 * Run 17: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **Adam**, batch normalisation - Accuracy: 0.986
-* Run 18: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **Adamax**, batch normalisation - Accuracy: 0.986
 
 ### Learning curve Optimizer wise
 <img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/ann-mnist-model/LearningCurve-OptimizersWise.png" width="1000"/>
@@ -235,10 +231,12 @@ refer [notebook](https://colab.research.google.com/drive/1FEYtjPH5GBY0KVUrX7bFax
 <img src="https://render.githubusercontent.com/render/math?math=J_{n}(\theta) = J_{0}(\theta) %2B \alpha \sum_{i=1}^{m}|\theta|">
 
 ## MlFlow experiments with Regularisation techniques 
-  * Run 17: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L1 Regularisation** (regularizers.l1(l1=0.0001)):  - Accuracy: 0.984
-  * Run 18: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L2 Regularisation** (regularizers.l2(l1=0.0001)):  - Accuracy: 0.982
-  * Run 19: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L1 + L2 Regularisation** (regularizers.l1_l2(l1=0.0001, l2=0.0001)):  - Accuracy: 0.981
-  * Run 20: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **Dropout Regularisation**:  - Accuracy: 0.991
+  * Run 18: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L1 Regularisation**: (regularizers.l1(l1=0.0001)) - Accuracy: 0.984
+  * Run 19: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L2 Regularisation**: (regularizers.l2(l1=0.0001)) - Accuracy: 0.982
+  * Run 20: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L1 + L2 Regularisation**: (regularizers.l1_l2(l1=0.0001, l2=0.0001)) - Accuracy: 0.981
+  * Run 21: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **Dropout Regularisation**: (tf.keras.layers.Dropout(0.3)) - Accuracy: 0.978
+
+<img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/images/Regularisation-mlflow.png" width="800"/>
 
 ## Observation on Early Stopping and Check-pointing
 ```python
@@ -250,7 +248,7 @@ accuracy          loss          restored_epoch          stopped_epoch
 0.9936727285	0.01931540295	          8	               13
 0.9849818349	0.04650410637	          3	                8
 ```
-### After certain epochs if Accuracy/Loss would not improve, the training will be stopped even before desired number of epochs (2)
+### After certain epochs if Accuracy/Loss would not improve, the training was stopped even before desired number of epochs (20)
 
 ## Transfer Learning
 * Transfer learning enables us to use the already built robust models
