@@ -238,12 +238,23 @@ refer [notebook](https://colab.research.google.com/drive/1FEYtjPH5GBY0KVUrX7bFax
 * LASSO (Least Absolute Shrinkage and Selection Operator) Regularisation
 * It is L1 vector norm of vector **w**
 * |w| is differentiable everywhere except when w=0
-<img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/images/L1-representation.png" width="150"/>
+  <img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/images/L1-representation.png" width="150"/>
 
 * Equation
   * Alpha is L1 regularisation term
-<img src="https://render.githubusercontent.com/render/math?math=J_{n}(\theta) = J_{0}(\theta) %2B \alpha \sum_{i=1}^{m}|\theta|">
 
+    <img src="https://render.githubusercontent.com/render/math?math=J_{n}(\theta) = J_{0}(\theta) %2B \alpha \sum_{i=1}^{m}|\theta|">
+
+### L2 Regularisation
+* Ridge Regularisation (It's called ridge regression because the diagonal of ones in the correlation matrix can be described as a ridge)
+* It is L2 vector norm of vector **w**
+* |w| is differentiable everywhere
+  <img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/images/L2-representation.png" width="350"/>
+
+* Equation
+  * Alpha is L2 regularisation term
+ 
+    <img src="https://render.githubusercontent.com/render/math?math=J_{n}(\theta) = J_{0}(\theta) %2B \alpha \sum_{i=1}^{m}|\theta|^{2}">
 ## MlFlow experiments with Regularisation techniques 
   * Run 18: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L1 Regularisation**: (regularizers.l1(l1=0.0001)) - Accuracy: 0.984
   * Run 19: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L2 Regularisation**: (regularizers.l2(l1=0.0001)) - Accuracy: 0.982
