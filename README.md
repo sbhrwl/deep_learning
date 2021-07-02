@@ -140,13 +140,17 @@ There are different choices for Activation functions
 * Run 11: batch_size: 50, epoch 20, Activation function: relu, Optimizer: SGD, batch normalisation with **Bias as false** - Accuracy: 0.991
 
 ## Cost function
+* Consider below Neural Network
+
+<img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/images/GD.jpg" width="800"/>
+
 * We now have the output from ANN (**y hat**) and we also know the Actual Output (**y**).
 * Using y hat and y, we calculate error/loss made by the model/network using **Cost functions**
 * Options for Cost functions depends on problem to solve
   * Regression
-    * MAE (L1) /MSE (L2) / RMSE
+    * MAE (L1) /MSE (L2) / RMSE / Huber Loss / Pseudo Huber Loss 
   * Classification
-    * CrossEntropy or Log Loss /Hinge Loss
+    * Hinge Loss / CrossEntropy or Log Loss (SIgmoid and Softmax)
  
  refer [notebook](https://drive.google.com/file/d/1M3xcVPb4bK64UYsqF2ylanEfjQs4o_oM/view?usp=sharing)
  
