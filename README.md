@@ -12,7 +12,7 @@
   * [Cost function](#cost-function)
   * [Optimizers](#optimizers)
     * [Backpropogation with chain rule](#backpropogation-with-chain-rule)
-    * [Types of optimisers](#types-of-optimisers)
+    * [Types of Optimizers](#types-of-optimizers)
   * [Regularisation Techniques](#regularisation-techniques)
   * [Observation on Early Stopping and Check-pointing](#observation-on-early-stopping-and-check-pointing)
   * [Transfer Learning](#transfer-learning)
@@ -207,6 +207,20 @@ To minimise loss we perform **Gradient Descent**. The entity that performs gradi
 * Which would eventually mean, moving towards the **ZERO**
 
 <img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/images/WeightInitilaisedOnNegativeSide.png" width="400"/>
+
+### Types Of Optimizers
+refer [notebook](https://colab.research.google.com/drive/1FEYtjPH5GBY0KVUrX7bFaxRy736WLQvz?usp=sharing)
+### Optimizers Recommendation
+| Optimizer       | Convergence Speed  | Convergence Quality |
+| --------------- | ------------------ | ------------------- |
+| SGD             | 2                  | 3                   |
+| SGD momentum    | 2                  | 3                   |
+| NAG             | 2                  | 3                   |
+| Adagrad         | 3                  | 1 (Stops early)     |
+| RMS prop        | 3                  | 2-3                 |
+| Adam            | 3                  | 2-3                 |
+| Adamax          | 3                  | 2-3                 |
+| Nadam           | 3                  | 2-3                 |
 
 ### MlFlow experiments with different types of Optimizers
 * Run 12: batch_size: 50, epoch 20, Activation function: relu, Optimizer: **SGD (with Momentum as 0.9)**, batch normalisation - Accuracy: 0.991 (same as Run 11)
