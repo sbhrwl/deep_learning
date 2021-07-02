@@ -14,6 +14,11 @@
     * [Backpropogation with chain rule](#backpropogation-with-chain-rule)
     * [Types of Optimizers](#types-of-optimizers)
   * [Regularisation Techniques](#regularisation-techniques)
+    * [L1 Regularisation](#l1-regularisation)
+    * [L2 Regularisation](#l2-regularisation)
+    * [L1_L2 Regularisation](#l1_l2-regularisation)
+    * [Max norm Regularisation](#max-norm-regularisation)
+    * [Dropout](#dropout)
   * [Observation on Early Stopping and Check-pointing](#observation-on-early-stopping-and-check-pointing)
   * [Transfer Learning](#transfer-learning)
 
@@ -143,6 +148,8 @@ There are different choices for Activation functions
   * Classification
     * CrossEntropy or Log Loss /Hinge Loss
  
+ refer [notebook](https://drive.google.com/file/d/1M3xcVPb4bK64UYsqF2ylanEfjQs4o_oM/view?usp=sharing)
+ 
 ## MlFlow experiments with Loss Functions 
 <img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/images/MlFlow-11experiments.png" width="1000"/>
 
@@ -255,6 +262,35 @@ refer [notebook](https://colab.research.google.com/drive/1FEYtjPH5GBY0KVUrX7bFax
   * Alpha is L2 regularisation term
  
     <img src="https://render.githubusercontent.com/render/math?math=J_{n}(\theta) = J_{0}(\theta) %2B \alpha \sum_{i=1}^{m}|\theta|^{2}">
+### L1_L2 Regularisation
+* Equation
+ 
+    <img src="https://render.githubusercontent.com/render/math?math=J_{n}(\theta) = J_{0}(\theta) %2B r\alpha \sum_{i=1}^{m}|\theta|^{2} %2B \frac{(1-r)}{2}\alpha \sum_{i=1}^{m}|\theta|^{2}">
+
+  * **r**: mix ratio
+  * r -> 1: L1 is dominating
+  * r -> 0: L2 is dominating
+### Max norm Regularisation
+* We are not adding to **Cost** function
+* We scale **weights**
+* **w** for incoming connection us **constrained** based on below condition for L2 norm (**|| ||**)
+
+  <img src="https://render.githubusercontent.com/render/math?math=\left \| w \right \|_{2} <= r">
+  
+  r is **maxnorm hyperparameter**
+* After each training step, weights will be scaled as below based on **r**
+
+  <img src="https://render.githubusercontent.com/render/math?math=w = w\cdot \frac{r}{\left \| w \right \|_{2}}">
+
+* If <img src="https://render.githubusercontent.com/render/math?math={\left \| w \right \|_{2}} = r"> implies **NO Weight update**
+* Keras implementation: **kernel_constraint=keras.constraints.max_norm(1.)**
+### Dropout
+* Dropout enables us to select **percentage** of neurons to **retain** at each layer of our neural network, alos refered as **keeping probability**
+* This in turn creates multiple neural network architecture
+* During BP weights of neurons connected in that NN architecture are calculated
+* During test/**inference**, **weight** for a particular neuron are scaled by **keeping probability w.p**
+
+refer [notebook](https://drive.google.com/file/d/1ZDvVALF2UXm8VRKIhJJsvRW7jzJLGEQa/view?usp=sharing)
 ## MlFlow experiments with Regularisation techniques 
   * Run 18: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L1 Regularisation**: (regularizers.l1(l1=0.0001)) - Accuracy: 0.984
   * Run 19: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L2 Regularisation**: (regularizers.l2(l1=0.0001)) - Accuracy: 0.982
