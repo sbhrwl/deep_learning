@@ -94,6 +94,7 @@ There are different choices for Activation functions
 * Maxout (ReLU and leaky ReLU are special cases of Maxout)
 * Swish
 * Softplus
+refer [notebook](https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/notebooks/ActivationFunctions.ipynb)
 ### It is the Activation function, more precisely, different parts of activation function that gets activated with the "z" and results in fitting the  model to data
 * Boundary line for simple linear problems
 * Curves for non linear problems
