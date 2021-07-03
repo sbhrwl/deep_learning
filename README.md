@@ -152,7 +152,7 @@ There are different choices for Activation functions
   * Classification
     * Hinge Loss / CrossEntropy or Log Loss (SIgmoid and Softmax)
  
- refer [notebook](https://drive.google.com/file/d/1M3xcVPb4bK64UYsqF2ylanEfjQs4o_oM/view?usp=sharing)
+ refer [notebook](https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/notebooks/LossFunctions.ipynb)
  
 ## MlFlow experiments with Loss Functions 
 <img src="https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/images/MlFlow-11experiments.png" width="1000"/>
@@ -294,7 +294,7 @@ refer [notebook](https://colab.research.google.com/drive/1FEYtjPH5GBY0KVUrX7bFax
 * During BP weights of neurons connected in that NN architecture are calculated
 * During test/**inference**, **weight** for a particular neuron are scaled by **keeping probability w.p**
 
-refer [notebook](https://drive.google.com/file/d/1ZDvVALF2UXm8VRKIhJJsvRW7jzJLGEQa/view?usp=sharing)
+refer [notebook](https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/notebooks/Regularization.ipynb)
 ## MlFlow experiments with Regularisation techniques 
   * Run 18: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L1 Regularisation**: (regularizers.l1(l1=0.0001)) - Accuracy: 0.984
   * Run 19: batch_size: 50, epoch 20, Activation function: relu, Optimizer: Adam, batch normalisation, **L2 Regularisation**: (regularizers.l2(l1=0.0001)) - Accuracy: 0.982
@@ -362,6 +362,7 @@ python src/transfer_learning/ann_mnist_transfer_learning.py
 python src/transfer_learning/is_even.py
 ```
 
+* [Tensorflow](https://github.com/sbhrwl/dl_experiments/blob/main/artifacts/notebooks/tf2_complete_demo.ipynb)
 * [Latex](https://latex.codecogs.com/eqneditor/editor.php)
 * [Netron](https://netron.app/)
 * [Sketch](https://app.sketchup.com/app?hl=en#)
