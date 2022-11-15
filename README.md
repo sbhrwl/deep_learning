@@ -25,7 +25,7 @@
 * [Tensor explained](https://www.youtube.com/watch?v=L35fFDpwIM4)
   - Tensors for NN hold the data and the **Weights** and **Biases**
   - Tensors are designed for **Hardware acceleration** so that the NN can do all the math they need to do in a **relatively short period of time** and 
-  - Tensors also take care of **backprpogation** with **Automatic differentiation**
+  - Tensors also take care of **backpropagation** with **Automatic differentiation**
 # Perceptron
 ## A perceptron has 2 calculations to perform
 * Dot product (z) of Features (X) with weights (w) (adding bias)
