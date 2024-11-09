@@ -37,8 +37,7 @@ python src/perceptron/perceptron.py
 # Multi Layer Perceptron
 * Perceptron is limited to solving basic problem, if we were to build a model that could imitate XOR gate, we need more than one perceptron
 * So, in order to solve real world problems, we need different permutations and combinations of **Perceptron**, which results in MLP.
-* MLP can be considered as a subset of Artificial Neural Networks or Deep Neural Networks
-<img src="https://i.stack.imgur.com/n2Hde.png" width=40% ali>
+* NLP can be considered as a subset of Artificial Neural Networks or Deep Neural Networks
 
 # Problems with ANN
 * Vanishing Gradient: When using sigmoid activation function at Hidden layers
